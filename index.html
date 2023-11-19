@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/8a22f851dd.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link href="./style.css" rel="stylesheet" type="text/css" />
+
+    <title>Shopping List</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header"></header>
+      <main class="main" id="main">
+        <!-- dynamic content from script.js -->
+        <div class="main-lists">
+          <div class="list-item">
+            <button class="list-item-actions button--icon">
+              <i class="fa-solid fa-ellipsis-vertical icon-md"></i>
+            </button>
+            <h3>Title</h3>
+            <div class="main-progress">
+              <div class="main-progress-bar">
+                <span class="progress-bar-filled"></span>
+              </div>
+              <span class="main-progress-count">0/0</span>
+            </div>
+          </div>
+
+          <button class="button button--primary main-button">
+            <i class="fa-solid fa-plus icon"></i>
+            <span>New List</span>
+          </button>
+        </div>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
