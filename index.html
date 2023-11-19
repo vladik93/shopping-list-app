@@ -20,28 +20,14 @@
   </head>
   <body>
     <div class="container">
-      <header class="header"></header>
+      <header class="header">
+        <button class="button--icon header-sidenav-button">
+          <i class="fa-solid fa-bars icon-md"></i>
+        </button>
+        <h3 class="header-title">My Lists</h3>
+      </header>
       <main class="main" id="main">
         <!-- dynamic content from script.js -->
-        <div class="main-lists">
-          <div class="list-item">
-            <button class="list-item-actions button--icon">
-              <i class="fa-solid fa-ellipsis-vertical icon-md"></i>
-            </button>
-            <h3>Title</h3>
-            <div class="main-progress">
-              <div class="main-progress-bar">
-                <span class="progress-bar-filled"></span>
-              </div>
-              <span class="main-progress-count">0/0</span>
-            </div>
-          </div>
-
-          <button class="button button--primary main-button">
-            <i class="fa-solid fa-plus icon"></i>
-            <span>New List</span>
-          </button>
-        </div>
       </main>
       <footer class="footer"></footer>
     </div>
