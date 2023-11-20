@@ -4,7 +4,7 @@ const containerEl = document.getElementById("container");
 // fa-solid fa-title
 const icons = ["fish", "cheese", "carrot", "pizza-slice", "cookie"];
 
-includeHeader(containerEl);
+// includeHeader(containerEl);
 
 const generateRandomIcon = () => {
   console.log("generateRandomIcon ===>");
@@ -15,4 +15,4 @@ const generateRandomIcon = () => {
   containerEl.innerHTML += `<i class="${icon} icon--mdx2">`;
 };
 
-generateRandomIcon();
+// generateRandomIcon();

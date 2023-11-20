@@ -24,11 +24,16 @@ body {
 /* VARIABLES */
 
 :root {
-  --secondary-text-color: #555;
+  /* PADDING  */
+  --input-padding: 0.8rem 1.6rem;
+  /* BORDER RADIUS */
   --button-border-radius: 40px;
   --border-radius-sm: 5px;
+  --border-radius-md: 7px;
   /* COLORS */
   --color--primary: #5c8374;
+  --color--secondary: #ccc;
+  --secondary-text-color: #555;
 
   /* ICON */
   --color--icon: #ccc;
@@ -40,6 +45,7 @@ body {
 /* GENERAL */
 
 .container {
+  overflow-x: hidden;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -55,9 +61,13 @@ body {
   font-size: 1.4rem;
 }
 
+.text--sm {
+  font-size: 1.2rem;
+}
+
 .button {
   padding: 1.4rem 1.6rem;
-  display: flex;
+
   gap: 0.8rem;
   text-transform: uppercase;
   font-weight: 700;
@@ -65,9 +75,17 @@ body {
   border: none;
 }
 
+.button--full {
+  width: 100%;
+}
+
 .button--primary {
   background: var(--color--primary);
   color: #fff;
+}
+
+.button--secondary {
+  background: var(--color--secondary);
 }
 
 .button--icon {
@@ -89,4 +107,15 @@ body {
 
 .icon--lg {
   font-size: 12.8rem;
+}
+
+.input {
+  border-radius: var(--border-radius-md);
+  border: none;
+  padding: var(--input-padding);
+  outline: none;
+}
+
+.input--full {
+  width: 100%;
 }

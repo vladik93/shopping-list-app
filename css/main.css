@@ -38,6 +38,10 @@
   bottom: 5.6rem;
 }
 
+.main-button span {
+  padding: 0 0.8rem;
+}
+
 /* LIST ITEM */
 
 .list-item {
