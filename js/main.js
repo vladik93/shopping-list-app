@@ -75,11 +75,6 @@ const generateLists = () => {
   newListButtonEl.addEventListener("click", () => {
     document.location.assign("./newlist.html");
   });
-
-  //   mainEl.innerHTML += `<button class="button button--primary main-button" onclick="onNewListClick()">
-  //   <i class="fa-solid fa-plus icon"></i>
-  //   <span>New List</span>
-  // </button>`;
 };
 
 const addList = () => {
