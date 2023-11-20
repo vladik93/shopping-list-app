@@ -44,12 +44,18 @@ const generateLists = () => {
       .join("");
 
     mainEl.appendChild(mainListsEl);
+    generateSubmit();
   }
+};
 
-  mainEl.innerHTML += `<button class="button button--primary main-button">
-  <i class="fa-solid fa-plus icon"></i>
-  <span>New List</span>
-</button>`;
+const generateSubmit = () => {
+  console.log(this.parentElement);
+  // this.innerHTML += `
+  //   <button class="button button--primary main-button">
+  //     <i class="fa-solid fa-plus icon"></i>
+  //     <span>New List</span>
+  //   </button>
+  // `;
 };
 
 const addList = () => {
@@ -62,5 +68,3 @@ const addList = () => {
 
   generateLists();
 };
-
-generateLists();
