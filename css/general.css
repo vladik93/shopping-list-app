@@ -1,0 +1,92 @@
+/* SETUP */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.6rem;
+}
+
+html,
+body {
+  height: 100%;
+  color: #333;
+}
+
+/* VARIABLES */
+
+:root {
+  --secondary-text-color: #555;
+  --button-border-radius: 40px;
+  --border-radius-sm: 5px;
+  /* COLORS */
+  --color--primary: #5c8374;
+
+  /* ICON */
+  --color--icon: #ccc;
+
+  /* SHADOW */
+  --color-shadow: #ccc;
+}
+
+/* GENERAL */
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f2f2f2;
+}
+
+.primary-text {
+  font-weight: 700;
+}
+
+.secondary-text {
+  color: var(--secondary-text-color);
+  font-size: 1.4rem;
+}
+
+.button {
+  padding: 1.4rem 1.6rem;
+  display: flex;
+  gap: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: var(--button-border-radius);
+  border: none;
+}
+
+.button--primary {
+  background: var(--color--primary);
+  color: #fff;
+}
+
+.button--icon {
+  border: none;
+  background: none;
+}
+
+.icon {
+  font-size: 1.6rem;
+}
+
+.icon--md {
+  font-size: 2rem;
+}
+
+.icon--mdx2 {
+  font-size: 4rem;
+}
+
+.icon--lg {
+  font-size: 12.8rem;
+}

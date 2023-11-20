@@ -1,0 +1,18 @@
+/* HEADER */
+
+.header {
+  height: 7rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0.8rem;
+}
+
+.header-title {
+  flex: 1;
+  padding: 0 0.8rem;
+}
+
+.header-sidenav-button {
+  padding: 0.8rem;
+}

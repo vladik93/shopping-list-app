@@ -1,8 +1,18 @@
-const mainEl = document.getElementById("main");
+import { includeHeader } from "../functions.js";
+
+const containerEl = document.getElementById("container");
+
+console.log("containerEl", containerEl);
 
 const lists = [];
 
+includeHeader(containerEl);
+
 const generateLists = () => {
+  const mainEl = document.createElement("main");
+  mainEl.classList.add("main");
+  mainEl.setAttribute("id", "main");
+
   mainEl.innerHTML = "";
 
   if (!lists.length) {
@@ -20,6 +30,7 @@ const generateLists = () => {
      
     `;
     mainEl.appendChild(mainNoListsEl);
+    containerEl.appendChild(mainEl);
   } else {
     const mainListsEl = document.createElement("div");
     mainListsEl.classList.add("main-lists");
@@ -44,12 +55,31 @@ const generateLists = () => {
       .join("");
 
     mainEl.appendChild(mainListsEl);
+    containerEl.appendChild(mainEl);
   }
 
-  mainEl.innerHTML += `<button class="button button--primary main-button">
-  <i class="fa-solid fa-plus icon"></i>
-  <span>New List</span>
-</button>`;
+  const newListButtonEl = document.createElement("button");
+  newListButtonEl.classList.add("button", "button--primary", "main-button");
+
+  const newListButtonIconEl = document.createElement("i");
+  newListButtonIconEl.classList.add("fa-solid", "fa-plus", "icon");
+
+  newListButtonEl.appendChild(newListButtonIconEl);
+
+  const newListButtonTextEl = document.createElement("span");
+  newListButtonTextEl.innerHTML = "New List";
+  newListButtonEl.appendChild(newListButtonTextEl);
+
+  mainEl.appendChild(newListButtonEl);
+
+  newListButtonEl.addEventListener("click", () => {
+    document.location.assign("./newlist.html");
+  });
+
+  //   mainEl.innerHTML += `<button class="button button--primary main-button" onclick="onNewListClick()">
+  //   <i class="fa-solid fa-plus icon"></i>
+  //   <span>New List</span>
+  // </button>`;
 };
 
 const addList = () => {
