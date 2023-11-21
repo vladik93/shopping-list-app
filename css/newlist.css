@@ -1,39 +1,47 @@
 .new-list {
-  padding: 2.4rem 0.8rem;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  padding-top: 1.6rem;
+}
+
+.new-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.8rem;
+  padding-bottom: 2.4rem;
   align-items: center;
   gap: 2.4rem;
-  position: relative;
 }
 
-.suggestions-title {
-  margin-right: auto;
+.new-list-suggestions-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
-.suggestions-container {
-  position: absolute;
-  width: 100%;
-  bottom: -0.8rem;
-}
-
-.suggestions {
+.new-list-suggestions {
   display: flex;
   overflow-x: scroll;
-  gap: 0.8rem;
-  width: 100%;
   padding: 0 0.8rem;
-
-  /* overflow: scroll; */
+  gap: 1.6rem;
+  padding-top: 0.8rem;
 }
 
-.suggestions button {
-  padding: 0.4rem 1.6rem;
+.new-list-suggestions-title {
+  font-weight: 700;
+  padding: 0 0.8rem;
 }
 
-.button-create-container {
-  position: fixed;
-  bottom: 1.6rem;
-  width: 100%;
-  padding: 0 0.8rem;
+.new-list-suggestion {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: var(--button-border-radius);
+}
+
+.new-list-button-wrapper {
+  padding: 1.6rem 0.8rem;
+}
+
+.new-list-button {
 }
