@@ -5,6 +5,8 @@ const containerEl = document.getElementById("container");
 
 const icons = ["fish", "cheese", "carrot", "pizza-slice", "cookie"];
 
+let newListInputValue = "";
+
 includeHeader();
 
 /**
@@ -32,7 +34,15 @@ const renderNewListInput = () => {
   const newListInputWrapper = document.createElement("div");
   newListInputWrapper.classList.add("new-list-input-wrapper");
 
-  newListInputWrapper.innerHTML = `<input type="text" class="input input--full" />`;
+  const newListInput = document.createElement("input");
+  newListInput.setAttribute("type", "text");
+  newListInput.classList.add("input", "input--full");
+  newListInput.setAttribute("id", "new-list-input");
+  newListInput.value = newListInputValue;
+
+  newListInput.addEventListener("change", handleNewListInputChange);
+
+  newListInputWrapper.appendChild(newListInput);
 
   containerEl.appendChild(newListInputWrapper);
 };
@@ -46,11 +56,13 @@ const renderSuggestionElement = (containerEl) => {
   suggestionsEl.classList.add("suggestions");
 
   suggestions.map((suggestion) => {
-    const suggestionEl = document.createElement("button");
-    suggestionEl.classList.add("suggestion", "button--secondary");
-    suggestionEl.innerText = suggestion;
+    const suggestionBtn = document.createElement("button");
+    suggestionBtn.classList.add("suggestion", "button--secondary");
+    suggestionBtn.innerText = suggestion;
 
-    suggestionsEl.appendChild(suggestionEl);
+    suggestionBtn.addEventListener("click", handleSuggestionButtonClick);
+
+    suggestionsEl.appendChild(suggestionBtn);
   });
 
   containerEl.appendChild(suggestionsEl);
@@ -82,10 +94,29 @@ const renderNewListButton = () => {
  * Renders the full new list page.
  */
 const renderNewListPage = () => {
+  containerEl.innerHTML = "";
+
   renderRandomIcon();
   renderNewListInput();
   renderSuggestions();
   renderNewListButton();
 };
+
+// EVENT LISTENER FUNCTIONS
+
+/**
+ * Listen to changes made in the new-list input field.
+ * @param {*} event - input event
+ */
+const handleNewListInputChange = (event) => {
+  newListInputValue = event.target.value;
+};
+
+const handleSuggestionButtonClick = (event) => {
+  newListInputValue = event.target.innerHTML;
+  renderNewListPage();
+};
+
+// INVOKED FUNCTIONS
 
 renderNewListPage();
