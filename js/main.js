@@ -6,7 +6,7 @@ console.log("containerEl", containerEl);
 
 const lists = [];
 
-includeHeader(containerEl);
+includeHeader();
 
 const generateLists = () => {
   const mainEl = document.createElement("main");

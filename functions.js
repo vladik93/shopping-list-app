@@ -1,5 +1,4 @@
 export const includeHeader = (containerEl) => {
-  console.log("includeHeader ===>");
   const headerEl = document.createElement("header");
   headerEl.classList.add("header");
 
@@ -8,5 +7,5 @@ export const includeHeader = (containerEl) => {
 </button>
 <h3 class="header-title">My Lists</h3>`;
 
-  containerEl.appendChild(headerEl);
+  document.body.appendChild(headerEl);
 };
