@@ -9,14 +9,24 @@ let newListInputValue = "";
 
 includeHeader();
 
+window.addEventListener("popstate", () => {
+  sessionStorage.removeItem("isNewListPage");
+});
+
 /**
  * Generates a random icon.
  */
 const renderRandomIcon = () => {
-  let index = Math.floor(Math.random() * icons.length);
+  let index =
+    sessionStorage.getItem("randomIconIndex") ||
+    Math.floor(Math.random() * icons.length);
+
   let icon = `fa-solid fa-${icons[index]}`;
 
-  // return `<i class="${icon} icon--mdx2">`;
+  if (sessionStorage.getItem("isNewListPage") === null) {
+    sessionStorage.setItem("isNewListPage", true);
+    sessionStorage.setItem("randomIconIndex", index);
+  }
 
   const randomIconWrapperEl = document.createElement("div");
   randomIconWrapperEl.classList.add("random-icon-wrapper");

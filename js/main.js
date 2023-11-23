@@ -2,8 +2,6 @@ import { includeHeader } from "../functions.js";
 
 const containerEl = document.getElementById("container");
 
-console.log("containerEl", containerEl);
-
 const lists = [];
 
 includeHeader();
