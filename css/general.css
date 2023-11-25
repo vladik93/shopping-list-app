@@ -21,6 +21,10 @@ body {
   color: #333;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 /* VARIABLES */
 
 :root {

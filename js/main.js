@@ -1,4 +1,4 @@
-import { includeHeader } from "../functions.js";
+import { includeHeader } from "../header.js";
 
 const containerEl = document.getElementById("container");
 
