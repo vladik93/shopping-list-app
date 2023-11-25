@@ -18,3 +18,10 @@
 .header-sidenav-button {
   padding: 0.8rem;
 }
+
+/* HEADER ACTIONS  */
+.header-actions {
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+}

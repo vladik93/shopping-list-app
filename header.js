@@ -24,10 +24,12 @@ const onHandleListShareClick = () => {
 
 // HEADER OPTIONS
 
-let mainHeaderOpts = setHeaderOptions("My Lists", true, [
+const mainHeaderOpts = setHeaderOptions("My Lists", true, [
   { icon: "user-plus", listener: onHandleListShareClick },
   { icon: "envelope", listener: onHandleListShareClick },
 ]);
+
+const newListOpts = setHeaderOptions("", false, []);
 
 // HEADER SWITCH CASES
 
@@ -72,6 +74,10 @@ const renderDynamicHeader = ({ title, isToggler, actionsArr }) => {
   headerTitleEl.innerText = title;
   headerEl.appendChild(headerTitleEl);
 
+  const headerActionsEl = document.createElement("div");
+  headerActionsEl.classList.add("header-actions");
+  headerEl.appendChild(headerActionsEl);
+
   actionsArr.map((action) => {
     const headerActionBtn = document.createElement("button");
     headerActionBtn.classList.add("header-action", "button--icon");
@@ -81,10 +87,11 @@ const renderDynamicHeader = ({ title, isToggler, actionsArr }) => {
 
     headerActionBtn.appendChild(headerActionIcon);
 
-    headerEl.appendChild(headerActionBtn);
+    headerActionsEl.appendChild(headerActionBtn);
 
     headerActionBtn.addEventListener("click", action.listener);
   });
+  headerEl.appendChild(headerActionsEl);
 
   document.body.appendChild(headerEl);
 };
