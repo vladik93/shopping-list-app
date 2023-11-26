@@ -49,6 +49,7 @@ const renderNewListInput = () => {
 /**
  * Renders a suggestion button from an array/DB.
  * @param {*} suggestion - suggestion title
+ * @returns suggestion button element.
  */
 const renderSuggestionButton = (suggestion) => {
   return `<button class="suggestion button--secondary" 
