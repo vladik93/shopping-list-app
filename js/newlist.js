@@ -44,38 +44,31 @@ const renderNewListInput = () => {
   const newListInputWrapper = document.createElement("div");
   newListInputWrapper.classList.add("new-list-input-wrapper");
 
-  const newListInput = document.createElement("input");
-  newListInput.setAttribute("type", "text");
-  newListInput.classList.add("input", "input--full");
-  newListInput.setAttribute("id", "new-list-input");
-  newListInput.value = newListInputValue;
-
-  newListInput.addEventListener("change", handleNewListInputChange);
-
-  newListInputWrapper.appendChild(newListInput);
-
+  newListInputWrapper.innerHTML = `<input type="text" class="input input--full" data-input="new-list" />`;
   containerEl.appendChild(newListInputWrapper);
+
+  newListInputWrapper.addEventListener("change", handleNewListInputChange);
 };
 
 /**
  * Renders suggestion buttons in HTML.
  * @param {*} containerEl - suggestions container element
  */
-const renderSuggestionElement = (containerEl) => {
-  const suggestionsEl = document.createElement("div");
-  suggestionsEl.classList.add("suggestions");
+const renderSuggestionElement = (suggestion) => {
+  const suggestionBtn = document.createElement("button");
+  suggestionBtn.classList.add("suggestion", "button--secondary");
 
-  suggestions.map((suggestion) => {
-    const suggestionBtn = document.createElement("button");
-    suggestionBtn.classList.add("suggestion", "button--secondary");
-    suggestionBtn.innerText = suggestion;
+  suggestionBtn.innerText = suggestion;
 
-    suggestionBtn.addEventListener("click", handleSuggestionButtonClick);
-
-    suggestionsEl.appendChild(suggestionBtn);
-  });
-
-  containerEl.appendChild(suggestionsEl);
+  return suggestionBtn;
+  // suggestions.map((suggestion) => {
+  //   const suggestionBtn = document.createElement("button");
+  //   suggestionBtn.classList.add("suggestion", "button--secondary");
+  //   suggestionBtn.innerText = suggestion;
+  //   suggestionBtn.addEventListener("click", handleSuggestionButtonClick);
+  //   suggestionsEl.appendChild(suggestionBtn);
+  // });
+  // containerEl.appendChild(suggestionsEl);
 };
 
 const renderSuggestions = () => {
@@ -84,9 +77,20 @@ const renderSuggestions = () => {
 
   suggestionsWrapperEl.innerHTML = `<span class="suggestions-title text--sm">Suggestions</span>`;
 
-  renderSuggestionElement(suggestionsWrapperEl);
+  const suggestionsEl = document.createElement("div");
+  suggestionsEl.classList.add("suggestions");
 
+  suggestionsEl.innerHTML += suggestions
+    .map(
+      (suggestion) =>
+        `<button class="suggestion button--secondary" data-suggestion=${suggestion}>${suggestion}</button>`
+    )
+    .join("");
+
+  suggestionsWrapperEl.appendChild(suggestionsEl);
   containerEl.appendChild(suggestionsWrapperEl);
+
+  suggestionsEl.addEventListener("click", handleSuggestionsClick);
 };
 
 /**
@@ -118,13 +122,21 @@ const renderNewListPage = () => {
  * Listen to changes made in the new-list input field.
  * @param {*} event - input event
  */
-const handleNewListInputChange = (event) => {
-  newListInputValue = event.target.value;
+const handleNewListInputChange = (e) => {
+  let target = e.target;
+  let input = target.dataset.input;
+
+  if (input === "new-list") {
+  }
 };
 
-const handleSuggestionButtonClick = (event) => {
-  newListInputValue = event.target.innerHTML;
-  renderNewListPage();
+const handleSuggestionsClick = (e) => {
+  let target = e.target;
+  if (target.dataset.suggestion) {
+    let suggestionValue = target.dataset.suggestion;
+  }
+
+  // renderNewListPage();
 };
 
 // INVOKED FUNCTIONS

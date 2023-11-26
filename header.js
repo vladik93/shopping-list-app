@@ -12,11 +12,6 @@ const setHeaderOptions = (title, isToggler, actions = []) => {
   return headerOptions;
 };
 
-// HEADER EVENT LISTENERS
-const onHandleListShareClick = () => {
-  console.log("HELLO");
-};
-
 // HEADER OPTIONS
 
 const mainHeaderOpts = setHeaderOptions("My Lists", true, [
@@ -49,7 +44,7 @@ const renderDynamicHeader = ({ title, isToggler, actionsArr }) => {
       <i class="fa-solid fa-bars icon--md">
     </button>`;
   } else {
-    headerEl.innerHTML += `<button class="button--icon header-sidenav-button" data-action="back">
+    headerEl.innerHTML += `<button class="button--icon header-sidenav-button" data-header-action="back">
       <i class="fa-solid fa-arrow-left icon--md"></i>
     </button>`;
   }
@@ -62,7 +57,7 @@ const renderDynamicHeader = ({ title, isToggler, actionsArr }) => {
 
   headerActionsEl.innerHTML += actionsArr
     .map((action) => {
-      return `<button class="header-action button--icon" id="${action.action}">
+      return `<button class="header-action button--icon">
       <i class="fa-solid fa-${action.icon} icon--md"></i>
     </button>`;
     })
@@ -74,28 +69,22 @@ const renderDynamicHeader = ({ title, isToggler, actionsArr }) => {
 
   // EVENT LISTENERS
 
-  headerActionsEl.addEventListener("click", handleHeaderActions);
+  // headerActionsEl.addEventListener("click", handleHeaderActions);
   headerEl.addEventListener("click", handleHeader);
 };
 
-const handleHeaderActions = (e) => {
-  let element = e.target;
-  let elementParent = element.parentElement;
+const handleHeader = (e) => {
+  let target = e.target;
+  let targetParent = target.parentElement;
 
-  if (elementParent.id === "list-share") {
-    console.log("list-share triggered ===>");
-  } else if (elementParent.id === "account-open") {
-    console.log("account-open triggered ====>");
+  let headerAction = targetParent.dataset.headerAction;
+
+  if (headerAction === "back") {
+    handleBackButtonClick();
   }
 };
 
-const handleHeader = (e) => {
-  let element = e.target;
-  let parentElement = element.parentElement;
-  let action = parentElement.dataset.action;
-
-  if (action === "back") {
-    history.back();
-    sessionStorage.clear();
-  }
+const handleBackButtonClick = () => {
+  history.back();
+  sessionStorage.clear();
 };
