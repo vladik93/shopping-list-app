@@ -12,8 +12,6 @@ const setHeaderOptions = (title, isToggler, actions = []) => {
   return headerOptions;
 };
 
-// HEADER OPTIONS
-
 const mainHeaderOpts = setHeaderOptions("My Lists", true, [
   { action: "list-share", icon: "user-plus" },
   { action: "account-open", icon: "envelope" },

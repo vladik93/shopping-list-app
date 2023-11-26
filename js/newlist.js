@@ -1,11 +1,15 @@
 import { includeHeader } from "../header.js";
-import { suggestions } from "../data.js";
+import { suggestions, lists } from "../data.js";
 
 const containerEl = document.getElementById("container");
+
+// CONTAINER EVENT LISTENERS
 
 const icons = ["fish", "cheese", "carrot", "pizza-slice", "cookie"];
 
 let newListInputValue = "";
+
+let newListUrl = "http://localhost:5500/list.html?";
 
 includeHeader();
 
@@ -87,9 +91,11 @@ const renderSuggestions = () => {
 const renderNewListButton = () => {
   const newListButtonWrapperEl = document.createElement("div");
   newListButtonWrapperEl.classList.add("new-list-button-wrapper");
-  newListButtonWrapperEl.innerHTML = `<button class="new-list-button button--full button button--primary">CREATE</button>`;
+  newListButtonWrapperEl.innerHTML = `<button class="new-list-button button--full button button--primary" data-action='create'>CREATE</button>`;
 
   containerEl.appendChild(newListButtonWrapperEl);
+
+  newListButtonWrapperEl.addEventListener("click", handleNewListButtonClick);
 };
 
 /**
@@ -109,7 +115,6 @@ const renderNewListPage = () => {
  * @param {*} event - input event
  */
 const handleNewListInputChange = (e) => {
-  console.log("handleNewListInputChange ====>");
   let target = e.target;
   let input = target.dataset.input;
 
@@ -134,6 +139,45 @@ const handleSuggestionsClick = (e) => {
   }
 
   renderNewListPage();
+};
+
+const handleNewListButtonClick = (e) => {
+  console.log("handleNewListButtonClick ===>");
+
+  let listTitle = newListInputValue;
+
+  let target = e.target;
+  let action = target.dataset.action;
+
+  if (action === "create") {
+    addNewList(listTitle);
+  }
+};
+
+const addNewList = (title) => {
+  console.log("addNewList ===> ");
+  let newList = {
+    id: new Date().getTime(),
+    dateAdded: new Date(),
+    title: title !== "" ? title : "New List",
+  };
+
+  lists.push(newList);
+
+  localStorage.setItem("LISTS", JSON.stringify(lists));
+
+  newListInputValue = "";
+
+  navigateToNewListPage(newList);
+};
+
+const navigateToNewListPage = (newList) => {
+  console.log("navigateToNewListPage ===>");
+  const searchParams = new URLSearchParams({ id: newList.id });
+
+  const queryString = searchParams.toString();
+
+  window.location.href = newListUrl + queryString;
 };
 
 // INVOKED FUNCTIONS
