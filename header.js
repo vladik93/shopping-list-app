@@ -21,11 +21,10 @@ const mainHeaderOpts = setHeaderOptions("My Lists", true, [
 
 const newListOpts = setHeaderOptions("", false, []);
 
-// HEADER SWITCH CASES
-
-export const includeHeader = (containerEl) => {
-  console.log(window.location);
-
+/**
+ * Renders the header element in a page based on the current URL.
+ */
+export const includeHeader = () => {
   switch (window.location.pathname) {
     case "/":
       renderDynamicHeader(mainHeaderOpts);
@@ -67,9 +66,6 @@ const renderDynamicHeader = ({ title, isToggler, actionsArr }) => {
 
   document.body.appendChild(headerEl);
 
-  // EVENT LISTENERS
-
-  // headerActionsEl.addEventListener("click", handleHeaderActions);
   headerEl.addEventListener("click", handleHeader);
 };
 

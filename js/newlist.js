@@ -9,10 +9,6 @@ let newListInputValue = "";
 
 includeHeader();
 
-window.addEventListener("popstate", () => {
-  sessionStorage.removeItem("isNewListPage");
-});
-
 /**
  * Generates a random icon.
  */
@@ -44,32 +40,26 @@ const renderNewListInput = () => {
   const newListInputWrapper = document.createElement("div");
   newListInputWrapper.classList.add("new-list-input-wrapper");
 
-  newListInputWrapper.innerHTML = `<input type="text" class="input input--full" data-input="new-list" />`;
+  newListInputWrapper.innerHTML = `<input type="text" value="${newListInputValue}" class="input input--full" data-input="new-list" />`;
   containerEl.appendChild(newListInputWrapper);
 
   newListInputWrapper.addEventListener("change", handleNewListInputChange);
 };
 
 /**
- * Renders suggestion buttons in HTML.
- * @param {*} containerEl - suggestions container element
+ * Renders a suggestion button from an array/DB.
+ * @param {*} suggestion - suggestion title
  */
-const renderSuggestionElement = (suggestion) => {
-  const suggestionBtn = document.createElement("button");
-  suggestionBtn.classList.add("suggestion", "button--secondary");
-
-  suggestionBtn.innerText = suggestion;
-
-  return suggestionBtn;
-  // suggestions.map((suggestion) => {
-  //   const suggestionBtn = document.createElement("button");
-  //   suggestionBtn.classList.add("suggestion", "button--secondary");
-  //   suggestionBtn.innerText = suggestion;
-  //   suggestionBtn.addEventListener("click", handleSuggestionButtonClick);
-  //   suggestionsEl.appendChild(suggestionBtn);
-  // });
-  // containerEl.appendChild(suggestionsEl);
+const renderSuggestionButton = (suggestion) => {
+  return `<button class="suggestion button--secondary" 
+  data-suggestion=${suggestion}>
+  ${suggestion}
+  </button>`;
 };
+
+/**
+ * Renders available suggestions from an array or db.
+ */
 
 const renderSuggestions = () => {
   const suggestionsWrapperEl = document.createElement("div");
@@ -81,10 +71,7 @@ const renderSuggestions = () => {
   suggestionsEl.classList.add("suggestions");
 
   suggestionsEl.innerHTML += suggestions
-    .map(
-      (suggestion) =>
-        `<button class="suggestion button--secondary" data-suggestion=${suggestion}>${suggestion}</button>`
-    )
+    .map((suggestion) => renderSuggestionButton(suggestion))
     .join("");
 
   suggestionsWrapperEl.appendChild(suggestionsEl);
@@ -116,27 +103,36 @@ const renderNewListPage = () => {
   renderNewListButton();
 };
 
-// EVENT LISTENER FUNCTIONS
-
 /**
  * Listen to changes made in the new-list input field.
  * @param {*} event - input event
  */
 const handleNewListInputChange = (e) => {
+  console.log("handleNewListInputChange ====>");
   let target = e.target;
   let input = target.dataset.input;
 
   if (input === "new-list") {
+    let value = target.value;
+    newListInputValue = value;
   }
+
+  console.log(newListInputValue);
 };
+
+/**
+ * Inputs clicked suggestion in the input box.
+ * @param {*} e - event parameter
+ */
 
 const handleSuggestionsClick = (e) => {
   let target = e.target;
   if (target.dataset.suggestion) {
-    let suggestionValue = target.dataset.suggestion;
+    let value = target.dataset.suggestion;
+    newListInputValue = value;
   }
 
-  // renderNewListPage();
+  renderNewListPage();
 };
 
 // INVOKED FUNCTIONS
