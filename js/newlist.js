@@ -1,11 +1,9 @@
 import { includeHeader } from "../header.js";
-import { suggestions, lists } from "../data.js";
+import { suggestions, lists, icons } from "../data.js";
 
 const containerEl = document.getElementById("container");
 
 // CONTAINER EVENT LISTENERS
-
-const icons = ["fish", "cheese", "carrot", "pizza-slice", "cookie"];
 
 let newListInputValue = "";
 

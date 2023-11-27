@@ -8,3 +8,5 @@ export const suggestions = [
   "food",
   "supermarket",
 ];
+
+export const icons = ["fish", "cheese", "carrot", "pizza-slice", "cookie"];

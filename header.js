@@ -29,6 +29,9 @@ export const includeHeader = () => {
       break;
     case "/newlist.html":
       renderDynamicHeader(newListOpts);
+      break;
+    case "/list.html":
+      renderDynamicHeader(mainHeaderOpts);
   }
 };
 
@@ -62,7 +65,7 @@ const renderDynamicHeader = ({ title, isToggler, actionsArr }) => {
 
   headerEl.appendChild(headerActionsEl);
 
-  document.body.appendChild(headerEl);
+  document.body.insertAdjacentElement("afterbegin", headerEl);
 
   headerEl.addEventListener("click", handleHeader);
 };
