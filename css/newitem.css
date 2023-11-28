@@ -1,0 +1,34 @@
+.item-header {
+  background: var(--color--primary);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  position: fixed;
+  width: 100%;
+}
+
+.item-header-search {
+  display: flex;
+  gap: 1.6rem;
+  padding: 1.6rem 1.6rem 0.8rem 1.6rem;
+}
+
+.item-header i {
+  color: #fff;
+}
+
+/* ITEM HEADER TABS */
+
+.item-header-tabs {
+  display: flex;
+}
+
+.tab {
+  flex: 1;
+  padding: 0.8rem 1.6rem;
+  background: inherit;
+  border: none;
+  font-weight: var(--font-weight-bold);
+  color: #fff;
+}

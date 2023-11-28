@@ -89,7 +89,7 @@ const renderSuggestions = () => {
 const renderNewListButton = () => {
   const newListButtonWrapperEl = document.createElement("div");
   newListButtonWrapperEl.classList.add("new-list-button-wrapper");
-  newListButtonWrapperEl.innerHTML = `<button class="new-list-button button--full button button--primary" data-action='create'>CREATE</button>`;
+  newListButtonWrapperEl.innerHTML = `<button class="new-list-button button--full button button--primary" data-button-action='create'>CREATE</button>`;
 
   containerEl.appendChild(newListButtonWrapperEl);
 
@@ -145,7 +145,7 @@ const handleNewListButtonClick = (e) => {
   let listTitle = newListInputValue;
 
   let target = e.target;
-  let action = target.dataset.action;
+  let action = target.dataset.buttonAction;
 
   if (action === "create") {
     addNewList(listTitle);

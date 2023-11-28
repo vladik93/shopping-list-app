@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 5.6rem 0.8rem;
+  padding: 4rem 0.8rem;
 }
 
 .list-icon {
@@ -20,4 +20,8 @@
 
 .add-item-button {
   display: flex;
+}
+
+.add-item-button span {
+  padding: 0 0.8rem;
 }

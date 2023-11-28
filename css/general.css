@@ -44,6 +44,11 @@ body {
 
   /* SHADOW */
   --color-shadow: #ccc;
+
+  /* FONT WEIGHT */
+  --font-weight-light: 300;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
 }
 
 /* GENERAL */
@@ -72,7 +77,6 @@ body {
 
 .button {
   padding: 1.4rem 1.6rem;
-
   gap: 0.8rem;
   text-transform: uppercase;
   font-weight: 700;
@@ -119,10 +123,15 @@ body {
 }
 
 .input {
+  display: flex;
   border-radius: var(--border-radius-md);
   border: none;
   padding: var(--input-padding);
   outline: none;
+}
+
+.input--rounded {
+  border-radius: var(--button-border-radius);
 }
 
 .input--full {

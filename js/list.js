@@ -1,4 +1,5 @@
 import { lists, icons } from "../data.js";
+import { navigateToPage } from "../functions.js";
 import { includeHeader } from "../header.js";
 
 console.log("list.js ====>");
@@ -15,6 +16,8 @@ const array = Array.from(entries);
 const randomIconIndex = sessionStorage.getItem("randomIconIndex") || 0;
 
 let listId = array[0];
+
+let newItemUrl = "http://localhost:5500/newitem.html?";
 
 console.log(lists);
 
@@ -35,16 +38,35 @@ function renderListPage(listId) {
         </p>
         
         <div class="list-button-wrapper">
-          <button class="add-item-button button button--primary">
+          <button class="add-item-button button button--lg button--primary" id="add-item">
             <i class="fa-solid fa-plus"></i>
-            <span>NEW LIST</span>
+            <span>ADD</span>
           </button>
         </div>
     
     `;
 
     containerEl.appendChild(listPageEl);
+
+    listPageEl.addEventListener("click", handleListPageClick);
   }
 }
+
+const handleListPageClick = (e) => {
+  console.log("handleListPageClick ===>");
+  let target = e.target;
+
+  if (target.closest("#add-item")) {
+    navigateToNewTasksPage(listId);
+  }
+};
+
+const navigateToNewTasksPage = (listId) => {
+  const searchParams = new URLSearchParams({ id: listId });
+
+  const queryString = searchParams.toString();
+
+  window.location.href = newItemUrl + queryString;
+};
 
 renderListPage(listId);
