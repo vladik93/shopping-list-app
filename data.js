@@ -1,5 +1,7 @@
 export let lists = JSON.parse(localStorage.getItem("LISTS")) || [];
 
+export let items = JSON.parse(localStorage.getItem("ITEMS")) || [];
+
 export const suggestions = [
   "shopping",
   "groceries",

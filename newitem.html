@@ -21,7 +21,7 @@
   </head>
   <body>
     <header class="item-header" id="item-header">
-      <div class="item-header-search">
+      <form class="item-header-search" id="item-header-search">
         <button class="button--icon back-icon">
           <i class="fa-solid fa-arrow-left icon--md"></i>
         </button>
@@ -29,11 +29,12 @@
           type="text"
           class="input input--rounded input--full"
           placeholder="Add new item"
+          data-input="add-item"
         />
         <button class="button--icon">
           <i class="fa-solid fa-microphone icon--md"></i>
         </button>
-      </div>
+      </form>
       <div class="item-header-tabs" id="item-header-tabs">
         <button class="tab active" id="popular-tab">POPULAR</button>
         <button class="tab" id="recent-tab">RECENT</button>

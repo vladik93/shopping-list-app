@@ -52,14 +52,32 @@
 
 /* LIST ITEM */
 
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
 .list-item {
   display: flex;
   width: 100%;
   justify-content: space-between;
   padding: 0rem 1.6rem;
   gap: 1.6rem;
+  align-items: center;
 }
 
 .list-item-content {
   display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.list-item-content span {
+  padding: 0.8rem;
+  color: #fff;
+  background: #ddd;
+  border-radius: var(--border-radius-full);
+  display: flex;
+  align-items: center;
 }

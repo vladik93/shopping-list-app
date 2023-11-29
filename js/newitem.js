@@ -1,7 +1,21 @@
-import { popularItems } from "../data.js";
+import { popularItems, items } from "../data.js";
 
 const containerEl = document.getElementById("container");
 const itemHeaderTabsEl = document.querySelector("#item-header-tabs");
+
+const itemHeaderSearchEl = document.getElementById("item-header-search");
+
+const handleItemHeaderSearch = (e) => {
+  console.log("handleItemHeaderSearch ===>");
+
+  let target = e.target;
+
+  if (target.closest("[data-input=add-item]")) {
+    let inputValue = target.value;
+  }
+};
+
+itemHeaderSearchEl.addEventListener("input", handleItemHeaderSearch);
 
 const handleItemHeaderTabsClick = (e) => {
   console.log("handleItemHeaderTabsClick ====>");
@@ -22,6 +36,16 @@ const handleItemHeaderTabsClick = (e) => {
 };
 
 itemHeaderTabsEl.addEventListener("click", handleItemHeaderTabsClick);
+
+const createListItem = (title) => {
+  let listItem = {
+    dateCreated: new Date().getTime(),
+    title,
+    quantity: 0,
+  };
+
+  popularItems.push(listItem);
+};
 
 const renderListItem = (item) => {
   let listItemTemplate = `

@@ -34,6 +34,7 @@ body {
   --button-border-radius: 40px;
   --border-radius-sm: 5px;
   --border-radius-md: 7px;
+  --border-radius-full: 100%;
   /* COLORS */
   --color--primary: #5c8374;
   --color--secondary: #ccc;
