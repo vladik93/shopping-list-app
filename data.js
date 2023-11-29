@@ -10,3 +10,16 @@ export const suggestions = [
 ];
 
 export const icons = ["fish", "cheese", "carrot", "pizza-slice", "cookie"];
+
+export const popularItems = [
+  "turkey",
+  "bread",
+  "cheese",
+  "chicken",
+  "blouse",
+  "butter",
+  "potatoes",
+  "eggs",
+  "toothpaste",
+  "deodorant",
+];

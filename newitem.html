@@ -20,7 +20,7 @@
     <title>Shopping List | New Item</title>
   </head>
   <body>
-    <header class="item-header">
+    <header class="item-header" id="item-header">
       <div class="item-header-search">
         <button class="button--icon back-icon">
           <i class="fa-solid fa-arrow-left icon--md"></i>
@@ -34,11 +34,16 @@
           <i class="fa-solid fa-microphone icon--md"></i>
         </button>
       </div>
-      <div class="item-header-tabs">
-        <button class="tab">POPULAR</button>
-        <button class="tab">RECENT</button>
+      <div class="item-header-tabs" id="item-header-tabs">
+        <button class="tab active" id="popular-tab">POPULAR</button>
+        <button class="tab" id="recent-tab">RECENT</button>
       </div>
     </header>
-    <div class="container"></div>
+    <div class="container" id="container">
+      <!-- Content Here -->
+    </div>
+
+    <script src="./data.js" type="module"></script>
+    <script src="./js/newitem.js" type="module"></script>
   </body>
 </html>

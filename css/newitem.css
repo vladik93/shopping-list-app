@@ -25,10 +25,41 @@
 }
 
 .tab {
+  position: relative;
   flex: 1;
   padding: 0.8rem 1.6rem;
   background: inherit;
   border: none;
   font-weight: var(--font-weight-bold);
   color: #fff;
+}
+
+.tab::after {
+  content: "";
+  content: "";
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  position: absolute;
+  width: 0%;
+  height: 3px;
+}
+
+.tab.active::after {
+  width: 100%;
+  transition: width 0.2s ease-in;
+}
+
+/* LIST ITEM */
+
+.list-item {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0rem 1.6rem;
+  gap: 1.6rem;
+}
+
+.list-item-content {
+  display: flex;
 }
