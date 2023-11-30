@@ -1,21 +1,44 @@
 import { popularItems, items } from "../data.js";
 
-const containerEl = document.getElementById("container");
+const containerEl = document.querySelector(".container");
 const itemHeaderTabsEl = document.querySelector("#item-header-tabs");
 
-const itemHeaderSearchEl = document.getElementById("item-header-search");
+const newItemInputEl = document.getElementById("new-item-input");
+let newItemInputFlag = false;
 
-const handleItemHeaderSearch = (e) => {
+const handleItemHeaderInput = (e) => {
   console.log("handleItemHeaderSearch ===>");
 
   let target = e.target;
+  let dataInput = e.target.dataset.input;
 
-  if (target.closest("[data-input=add-item]")) {
-    let inputValue = target.value;
+  if (target.closest(`[data-input=${dataInput}]`)) {
+    let inputValue = newItemInputEl.value;
+    target.value = inputValue;
+
+    if (inputValue.length) {
+      console.log("inputValue ===>", "not empty");
+      if (!newItemInputFlag) {
+        newItemInputFlag = true;
+
+        renderAddItemButton();
+      }
+    } else {
+      newItemInputFlag = false;
+      let addItemBtn = document.querySelector("#add-item-button");
+
+      addItemBtn.remove();
+    }
   }
 };
 
-itemHeaderSearchEl.addEventListener("input", handleItemHeaderSearch);
+newItemInputEl.addEventListener("input", handleItemHeaderInput);
+
+const renderAddItemButton = () => {
+  let addItemButtonEl = `<button class="add-item-button" id="add-item-button"><i class="fa-solid fa-check icon"></i></button>`;
+
+  containerEl.innerHTML += addItemButtonEl;
+};
 
 const handleItemHeaderTabsClick = (e) => {
   console.log("handleItemHeaderTabsClick ====>");

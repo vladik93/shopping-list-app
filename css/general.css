@@ -61,6 +61,7 @@ body {
   flex-direction: column;
   background-color: #f2f2f2;
   padding-top: 7rem;
+  position: relative;
 }
 
 .primary-text {

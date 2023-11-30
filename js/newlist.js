@@ -1,7 +1,7 @@
 import { includeHeader } from "../header.js";
 import { suggestions, lists, icons } from "../data.js";
 
-const containerEl = document.getElementById("container");
+const containerEl = document.querySelector(".container");
 
 // CONTAINER EVENT LISTENERS
 

@@ -1,4 +1,7 @@
 import { getCurrentTime } from "./functions.js";
+const containerEl = document.querySelector(".container");
+
+console.log(containerEl, document.location.href);
 
 const setHeaderOptions = (title, isToggler, actions = []) => {
   let headerOptions = {
@@ -32,10 +35,12 @@ export const includeHeader = () => {
       break;
     case "/list.html":
       renderDynamicHeader(mainHeaderOpts);
+      break;
   }
 };
 
 const renderDynamicHeader = ({ title, isToggler, actionsArr }) => {
+  console.log("renderDynamicHeader ===>");
   const headerEl = document.createElement("header");
   headerEl.classList.add("header");
 
@@ -65,7 +70,8 @@ const renderDynamicHeader = ({ title, isToggler, actionsArr }) => {
 
   headerEl.appendChild(headerActionsEl);
 
-  document.body.insertAdjacentElement("afterbegin", headerEl);
+  console.log("before container append ====>");
+  containerEl.insertAdjacentElement("afterbegin", headerEl);
 
   headerEl.addEventListener("click", handleHeader);
 };

@@ -6,7 +6,7 @@ console.log("list.js ====>");
 
 includeHeader();
 
-const containerEl = document.getElementById("container");
+const containerEl = document.querySelector(".container");
 
 const url = window.location.href;
 const searchParams = new URL(url).searchParams;

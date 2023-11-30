@@ -1,7 +1,7 @@
 import { lists } from "../data.js";
 import { includeHeader } from "../header.js";
 
-const containerEl = document.getElementById("container");
+const containerEl = document.querySelector(".container");
 
 includeHeader();
 
