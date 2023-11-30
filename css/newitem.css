@@ -5,7 +5,9 @@
   flex-direction: column;
   gap: 1.6rem;
   position: fixed;
+  top: 0;
   width: 100%;
+  z-index: 10;
 }
 
 .item-header-search {
@@ -80,4 +82,10 @@
   border-radius: var(--border-radius-full);
   display: flex;
   align-items: center;
+}
+
+.add-item-button {
+  position: fixed;
+  bottom: 1.6rem;
+  right: 1.6rem;
 }

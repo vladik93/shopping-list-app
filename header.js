@@ -71,7 +71,7 @@ const renderDynamicHeader = ({ title, isToggler, actionsArr }) => {
   headerEl.appendChild(headerActionsEl);
 
   console.log("before container append ====>");
-  containerEl.insertAdjacentElement("afterbegin", headerEl);
+  document.body.insertAdjacentElement("afterbegin", headerEl);
 
   headerEl.addEventListener("click", handleHeader);
 };

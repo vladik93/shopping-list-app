@@ -35,7 +35,7 @@ const handleItemHeaderInput = (e) => {
 newItemInputEl.addEventListener("input", handleItemHeaderInput);
 
 const renderAddItemButton = () => {
-  let addItemButtonEl = `<button class="add-item-button" id="add-item-button"><i class="fa-solid fa-check icon"></i></button>`;
+  let addItemButtonEl = `<button class="add-item-button button button--primary" id="add-item-button"><i class="fa-solid fa-check icon"></i></button>`;
 
   containerEl.innerHTML += addItemButtonEl;
 };
