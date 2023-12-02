@@ -14,14 +14,14 @@ export const suggestions = [
 export const icons = ["fish", "cheese", "carrot", "pizza-slice", "cookie"];
 
 export const popularItems = [
-  "turkey",
-  "bread",
-  "cheese",
-  "chicken",
-  "blouse",
-  "butter",
-  "potatoes",
-  "eggs",
-  "toothpaste",
-  "deodorant",
+  { id: 0, item: "turkey" },
+  { id: 1, item: "bread" },
+  { id: 2, item: "cheese" },
+  { id: 4, item: "chicken" },
+  { id: 5, item: "blouse" },
+  { id: 6, item: "butter" },
+  { id: 7, item: "potatoes" },
+  { id: 8, item: "eggs" },
+  { id: 9, item: "toothpaste" },
+  { id: 10, item: "deodorant" },
 ];

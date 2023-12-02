@@ -83,6 +83,11 @@
   display: flex;
   align-items: center;
 }
+
+.list-item.active span {
+  background: red;
+}
+
 .add-item-button {
   position: fixed;
   bottom: 1.6rem;

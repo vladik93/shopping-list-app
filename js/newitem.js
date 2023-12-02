@@ -84,10 +84,12 @@ const renderPopular = () => {
   const popularItemListEl = document.createElement("div");
   popularItemListEl.classList.add("item-list", "popular");
 
-  popularItems.map((item) => {
+  popularItems.map((item, index) => {
     const listItemEl = document.createElement("div");
     listItemEl.classList.add("list-item");
     listItemEl.dataset.listItemAction = "add";
+    listItemEl.dataset.listItemId = index;
+    listItemEl.dataset.listItemValue = item.item;
 
     listItemEl.innerHTML += renderListItem(item);
 
@@ -104,7 +106,7 @@ const renderRecent = () => {
   // HISTORY CAN BE DELETED.
 };
 
-const renderListItem = (item) => {
+const renderListItem = ({ item }) => {
   const listItemTemplate = `
     <div class="list-item-content">
       <span><i class="fa-solid fa-plus icon"></i></span> 
@@ -119,7 +121,7 @@ const handleListItemClick = (e) => {
   let target = e.target;
 
   if (target.closest(`[data-list-item-action=add]`)) {
-    addListItem("HELLO");
+    addListItem("Apple");
   }
 };
 
@@ -129,13 +131,32 @@ const addListItem = (title) => {
     id: new Date().getTime(),
     dateCreated: new Date(),
     title,
-    quantity: 0,
+    quantity: 1,
     listId: listId,
   };
 
   items.push(listItem);
 
   localStorage.setItem("ITEMS", JSON.stringify(items));
+
+  updateListItemElm();
+};
+
+const updateListItemElm = () => {
+  console.log("updateListItemEl ===>");
+  const listItemEls = document.querySelectorAll(".list-item");
+  listItemEls.forEach((listItem) => {
+    let itemValue = listItem.dataset.listItemValue;
+    if (items.some((item) => item.title === itemValue)) {
+      console.log("listItemFound ===>", listItem);
+      listItem.classList.add("active");
+    } else {
+      listItem.classList.remove("active");
+    }
+  });
+  localStorage.setItem("ITEMS", JSON.stringify(items));
 };
 
 renderPopular();
+
+updateListItemElm();
