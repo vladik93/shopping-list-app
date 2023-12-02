@@ -24,10 +24,4 @@ export const popularItems = [
   "eggs",
   "toothpaste",
   "deodorant",
-  "turkey",
-  "bread",
-  "cheese",
-  "chicken",
-  "blouse",
-  "butter",
 ];

@@ -1,10 +1,29 @@
 import { popularItems, items } from "../data.js";
 
+const itemHeaderEl = document.getElementById("item-header");
+
 const containerEl = document.querySelector(".container");
 const itemHeaderTabsEl = document.querySelector("#item-header-tabs");
 
 const newItemInputEl = document.getElementById("new-item-input");
 let newItemInputFlag = false;
+
+// URL PARAMS
+
+console.log("URL params ====>");
+const url = window.location.href;
+const searchParams = new URL(url).searchParams;
+const entries = new URLSearchParams(searchParams).values();
+const paramsArray = Array.from(entries);
+
+const listId = paramsArray[0];
+
+// Setting dynamic padding for container elm. based on header height
+
+document.addEventListener("DOMContentLoaded", () => {
+  let headerHeight = itemHeaderEl.getBoundingClientRect().height;
+  containerEl.style.paddingTop = headerHeight + "px";
+});
 
 const handleItemHeaderInput = (e) => {
   console.log("handleItemHeaderSearch ===>");
@@ -60,45 +79,63 @@ const handleItemHeaderTabsClick = (e) => {
 
 itemHeaderTabsEl.addEventListener("click", handleItemHeaderTabsClick);
 
-const createListItem = (title) => {
-  let listItem = {
-    dateCreated: new Date().getTime(),
-    title,
-    quantity: 0,
-  };
-
-  popularItems.push(listItem);
-};
-
-const renderListItem = (item) => {
-  let listItemTemplate = `
-    <div class="list-item">
-      <div class="list-item-content">
-        <span><i class="fa-solid fa-plus icon"></i></span> 
-        <p>${item}</p>
-      </div>
-      <div class="list-item-quantity">
-        <span>2</span>
-        <button id="item-quantity-action"><i class="fa-solid fa-minus"></i></button>
-      </div>
-    </div>
-  `;
-
-  return listItemTemplate;
-};
-
 const renderPopular = () => {
   containerEl.innerHTML = "";
   const popularItemListEl = document.createElement("div");
   popularItemListEl.classList.add("item-list", "popular");
 
-  popularItemListEl.innerHTML += popularItems
-    .map((item) => renderListItem(item))
-    .join("");
+  popularItems.map((item) => {
+    const listItemEl = document.createElement("div");
+    listItemEl.classList.add("list-item");
+    listItemEl.dataset.listItemAction = "add";
+
+    listItemEl.innerHTML += renderListItem(item);
+
+    popularItemListEl.appendChild(listItemEl);
+
+    listItemEl.addEventListener("click", handleListItemClick);
+  });
 
   containerEl.appendChild(popularItemListEl);
 };
 
-const renderRecent = () => {};
+const renderRecent = () => {
+  // RENDERS ONLY AFTER ADDING ITEM FROM POPULAR/INPUT.
+  // HISTORY CAN BE DELETED.
+};
+
+const renderListItem = (item) => {
+  const listItemTemplate = `
+    <div class="list-item-content">
+      <span><i class="fa-solid fa-plus icon"></i></span> 
+      <p>${item}</p>
+    </div>`;
+
+  return listItemTemplate;
+};
+
+const handleListItemClick = (e) => {
+  console.log("handleListItemClick ===>");
+  let target = e.target;
+
+  if (target.closest(`[data-list-item-action=add]`)) {
+    addListItem("HELLO");
+  }
+};
+
+const addListItem = (title) => {
+  console.log("createListItem ===>");
+  let listItem = {
+    id: new Date().getTime(),
+    dateCreated: new Date(),
+    title,
+    quantity: 0,
+    listId: listId,
+  };
+
+  items.push(listItem);
+
+  localStorage.setItem("ITEMS", JSON.stringify(items));
+};
 
 renderPopular();
