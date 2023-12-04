@@ -1,4 +1,4 @@
-import { popularItems, items } from "../data.js";
+import { collection, items } from "../data.js";
 
 const itemHeaderEl = document.getElementById("item-header");
 
@@ -70,10 +70,11 @@ const handleItemHeaderTabsClick = (e) => {
 
   if (target.closest("#recent-tab")) {
     target.classList.add("active");
-    renderPopular();
+    renderRecent();
   }
   if (target.closest("#popular-tab")) {
     target.classList.add("active");
+    renderPopular();
   }
 };
 
@@ -84,29 +85,51 @@ const renderPopular = () => {
   const popularItemListEl = document.createElement("div");
   popularItemListEl.classList.add("item-list", "popular");
 
-  popularItems.map((item, index) => {
-    const listItemEl = document.createElement("div");
-    listItemEl.classList.add("list-item");
-    listItemEl.dataset.listItemAction = "add";
-    listItemEl.dataset.listItemId = index;
-    listItemEl.dataset.listItemValue = item.item;
+  collection
+    .filter((x) => x.isPopular)
+    .map((item, index) => {
+      const listItemEl = document.createElement("div");
+      listItemEl.classList.add("list-item");
+      listItemEl.dataset.listItemAction = "add";
+      listItemEl.dataset.listItemId = index;
+      listItemEl.dataset.listItemValue = item.item;
 
-    listItemEl.innerHTML += renderListItem(item);
+      listItemEl.innerHTML += renderListItem(item);
 
-    popularItemListEl.appendChild(listItemEl);
+      popularItemListEl.appendChild(listItemEl);
 
-    listItemEl.addEventListener("click", handleListItemClick);
-  });
+      listItemEl.addEventListener("click", handleListItemClick);
+    });
 
   containerEl.appendChild(popularItemListEl);
 };
 
 const renderRecent = () => {
-  // RENDERS ONLY AFTER ADDING ITEM FROM POPULAR/INPUT.
-  // HISTORY CAN BE DELETED.
+  containerEl.innerHTML = "";
+  const recentItemListEl = document.createElement("div");
+  recentItemListEl.classList.add("item-list", "recent");
+
+  collection
+    .filter((x) => x.isRecent)
+    .map((item, index) => {
+      const listItemEl = document.createElement("div");
+      listItemEl.classList.add("list-item");
+      listItemEl.dataset.listItemAction = "add";
+      listItemEl.dataset.listItemId = index;
+      listItemEl.dataset.listItemValue = item.item;
+
+      listItemEl.innerHTML += renderListItem(item);
+
+      recentItemListEl.appendChild(listItemEl);
+
+      listItemEl.addEventListener("click", handleListItemClick);
+    });
+
+  containerEl.appendChild(recentItemListEl);
 };
 
 const renderListItem = ({ item }) => {
+  console.log("renderListItem ====>", item);
   const listItemTemplate = `
     <div class="list-item-content">
       <span><i class="fa-solid fa-plus icon"></i></span> 
@@ -121,12 +144,35 @@ const handleListItemClick = (e) => {
   let target = e.target;
 
   if (target.closest(`[data-list-item-action=add]`)) {
-    addListItem("Apple");
+    let itemValue = target.closest("[data-list-item-value]").dataset
+      .listItemValue;
+
+    addListItem(itemValue);
   }
 };
 
+const addToItemCollection = (title) => {
+  console.log("addToItemCollection ===>");
+  if (collection.some((item) => item.item === title)) return;
+
+  let newItem = {
+    id: collection.length - 1,
+    item: title,
+    isPopular: false,
+    isRecent: true,
+    dateAdded: new Date(),
+  };
+  collection.push(newItem);
+
+  localStorage.setItem("COLLECTION", JSON.stringify(collection));
+};
+
+addToItemCollection("Chipotlee");
+
 const addListItem = (title) => {
   console.log("createListItem ===>");
+  if (items.some((item) => item.title === title)) return;
+
   let listItem = {
     id: new Date().getTime(),
     dateCreated: new Date(),
@@ -139,23 +185,28 @@ const addListItem = (title) => {
 
   localStorage.setItem("ITEMS", JSON.stringify(items));
 
+  addToItemCollection(title);
+
   updateListItemElm();
 };
 
 const updateListItemElm = () => {
-  console.log("updateListItemEl ===>");
-  const listItemEls = document.querySelectorAll(".list-item");
+  let listItemEls = document.querySelectorAll(".list-item");
+
   listItemEls.forEach((listItem) => {
-    let itemValue = listItem.dataset.listItemValue;
-    if (items.some((item) => item.title === itemValue)) {
-      console.log("listItemFound ===>", listItem);
-      listItem.classList.add("active");
-    } else {
-      listItem.classList.remove("active");
+    if (items.some((item) => item.title === listItem.dataset.listItemValue)) {
+      let found = items.find(
+        (item) => item.title === listItem.dataset.listItemValue
+      );
+
+      if (found) {
+        listItem.classList.add("active");
+      }
     }
   });
-  localStorage.setItem("ITEMS", JSON.stringify(items));
 };
+
+addListItem("French Fry");
 
 renderPopular();
 
