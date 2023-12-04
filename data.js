@@ -82,32 +82,52 @@ let collectionArr = [
     item: "deodorant",
     isPopular: true,
     isRecent: false,
-    dateAdded: new Date("2015-03-25"),
+    dateAdded: new Date("2023-12-01"),
   },
 ];
 
 export let collection =
-  JSON.parse(localStorage.getItem("COLLECTION")) || collectionArr;
+  // JSON.parse(localStorage.getItem("COLLECTION")) ||
+  collectionArr;
 
-const updateIsRecent = () => {
-  console.log("updateIsRecent ====>", new Date());
+// const updateIsRecent = () => {
+//   console.log("updateIsRecent ====>", new Date());
 
-  let currentDate = new Date();
-  let futureDate = new Date(currentDate);
+//   let currentDate = new Date();
+//   let futureDate = new Date(currentDate);
 
-  futureDate.setDate(futureDate.getDate() + 2);
+//   futureDate.setDate(futureDate.getDate() + 2);
 
-  let newCollection = collection.map((item) => {
-    if (new Date(item.dateAdded).getTime() < futureDate.getTime()) {
-      console.log("itemDate < futureDate ===>");
-      console.log("futureDate ===>", futureDate);
-      console.log("itemDate ====>", item.dateAdded);
-      return { ...item, isRecent: true };
+//   let newCollection = collection.map((item) => {
+//     if (new Date(item.dateAdded).getTime() < futureDate.getTime()) {
+//       console.log("itemDate < futureDate ===>");
+//       console.log("futureDate ===>", futureDate);
+//       console.log("itemDate ====>", item.dateAdded);
+//       return { ...item, isRecent: true };
+//     }
+//     return { ...item, isRecent: false };
+//   });
+
+//   localStorage.setItem("COLLECTION", JSON.stringify(newCollection));
+// };
+
+// updateIsRecent();
+
+const setIsRecent = (daysTilExpire = 3) => {
+  console.log("updateIsRecent ===>");
+  collection.map((item) => {
+    const dateAdded = item.dateAdded.getTime();
+    const tilDate =
+      item.dateAdded.getTime() + daysTilExpire * 24 * 60 * 60 * 1000;
+
+    if (new Date().getTime() < tilDate) {
+      console.log("item title ===>", item.item);
+      console.log("item still has time");
+    } else {
+      console.log("item title ===>", item.item);
+      console.log("item expired!");
     }
-    return { ...item, isRecent: false };
   });
-
-  localStorage.setItem("COLLECTION", JSON.stringify(newCollection));
 };
 
-updateIsRecent();
+document.addEventListener("DOMContentLoaded", setIsRecent(3));
