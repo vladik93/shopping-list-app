@@ -97,9 +97,11 @@ const updateIsRecent = () => {
 
   futureDate.setDate(futureDate.getDate() + 2);
 
-  console.log("collection ===>", collection);
   let newCollection = collection.map((item) => {
     if (new Date(item.dateAdded).getTime() < futureDate.getTime()) {
+      console.log("itemDate < futureDate ===>");
+      console.log("futureDate ===>", futureDate);
+      console.log("itemDate ====>", item.dateAdded);
       return { ...item, isRecent: true };
     }
     return { ...item, isRecent: false };
