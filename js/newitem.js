@@ -25,6 +25,19 @@ document.addEventListener("DOMContentLoaded", () => {
   containerEl.style.paddingTop = headerHeight + "px";
 });
 
+const handleContainerClick = (e) => {
+  console.log("handleContainerClick ===>");
+  let target = e.target;
+
+  if (target.closest("#add-item-button")) {
+    let inputVal = newItemInputEl.value;
+
+    addListItem(inputVal);
+  }
+};
+
+containerEl.addEventListener("click", handleContainerClick);
+
 const handleItemHeaderInput = (e) => {
   console.log("handleItemHeaderSearch ===>");
 
@@ -158,16 +171,18 @@ const addToItemCollection = (title) => {
   let newItem = {
     id: collection.length - 1,
     item: title,
-    isPopular: false,
-    isRecent: true,
+    isPopular: true,
+    isRecent: false,
     dateAdded: new Date(),
   };
+
+  console.log("newItem ===>", newItem);
   collection.push(newItem);
 
   localStorage.setItem("COLLECTION", JSON.stringify(collection));
-};
 
-addToItemCollection("Chipotlee");
+  newItemInputEl.value = "";
+};
 
 const addListItem = (title) => {
   console.log("createListItem ===>");
@@ -185,9 +200,10 @@ const addListItem = (title) => {
 
   localStorage.setItem("ITEMS", JSON.stringify(items));
 
-  addToItemCollection(title);
+  console.log("items[item.length - 1] ===>", items[items.length - 1]);
+  addToItemCollection(items[items.length - 1].title);
 
-  updateListItemElm();
+  // updateListItemElm();
 };
 
 const updateListItemElm = () => {
@@ -205,8 +221,6 @@ const updateListItemElm = () => {
     }
   });
 };
-
-addListItem("French Fry");
 
 renderPopular();
 

@@ -87,8 +87,7 @@ let collectionArr = [
 ];
 
 export let collection =
-  // JSON.parse(localStorage.getItem("COLLECTION")) ||
-  collectionArr;
+  JSON.parse(localStorage.getItem("COLLECTION")) || collectionArr;
 
 // const updateIsRecent = () => {
 //   console.log("updateIsRecent ====>", new Date());
@@ -114,20 +113,15 @@ export let collection =
 // updateIsRecent();
 
 const setIsRecent = (daysTilExpire = 3) => {
-  console.log("updateIsRecent ===>");
-  collection.map((item) => {
-    const dateAdded = item.dateAdded.getTime();
-    const tilDate =
-      item.dateAdded.getTime() + daysTilExpire * 24 * 60 * 60 * 1000;
-
-    if (new Date().getTime() < tilDate) {
-      console.log("item title ===>", item.item);
-      console.log("item still has time");
-    } else {
-      console.log("item title ===>", item.item);
-      console.log("item expired!");
-    }
-  });
+  // console.log("updateIsRecent ===>");
+  // collection.map((item) => {
+  //   const dateAdded = item.dateAdded.getTime();
+  //   const untilDate =
+  //     item.dateAdded.getTime() + daysTilExpire * 24 * 60 * 60 * 1000;
+  //   console.log("item Name ===>", item.item);
+  //   console.log("dateAdded ===>", dateAdded);
+  //   console.log("untilDate ===>", untilDate);
+  // });
 };
 
 document.addEventListener("DOMContentLoaded", setIsRecent(3));
