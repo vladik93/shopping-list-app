@@ -77,42 +77,45 @@ const handleItemHeaderTabsClick = (e) => {
 
   let target = e.target;
 
-  const headerTabActiveEl = document.querySelector(".tab.active");
+  const headerTabActiveEl = document.querySelector(".item-header-tab.active");
 
   headerTabActiveEl.classList.remove("active");
 
   if (target.closest("#recent-tab")) {
     target.classList.add("active");
-    renderRecent();
+    renderList();
   }
   if (target.closest("#popular-tab")) {
     target.classList.add("active");
-    renderPopular();
+    renderList();
   }
 };
 
 itemHeaderTabsEl.addEventListener("click", handleItemHeaderTabsClick);
 
-const renderPopular = () => {
+const renderList = () => {
+  console.log("renderList f ===>");
+  const selectedTab = document.querySelector(".item-header-tab.active");
+
+  let data = selectedTab.dataset.tab;
+
   containerEl.innerHTML = "";
   const popularItemListEl = document.createElement("div");
-  popularItemListEl.classList.add("item-list", "popular");
+  popularItemListEl.classList.add("item-list", data);
 
-  collection
-    .filter((x) => x.isPopular)
-    .map((item, index) => {
-      const listItemEl = document.createElement("div");
-      listItemEl.classList.add("list-item");
-      listItemEl.dataset.listItemAction = "add";
-      listItemEl.dataset.listItemId = index;
-      listItemEl.dataset.listItemValue = item.item;
+  filterList(collection, data).map((item, index) => {
+    const listItemEl = document.createElement("div");
+    listItemEl.classList.add("list-item");
+    listItemEl.dataset.listItemAction = "add";
+    listItemEl.dataset.listItemId = index;
+    listItemEl.dataset.listItemValue = item.item;
 
-      listItemEl.innerHTML += renderListItem(item);
+    listItemEl.innerHTML += renderListItem(item);
 
-      popularItemListEl.appendChild(listItemEl);
+    popularItemListEl.appendChild(listItemEl);
 
-      listItemEl.addEventListener("click", handleListItemClick);
-    });
+    listItemEl.addEventListener("click", handleListItemClick);
+  });
 
   containerEl.appendChild(popularItemListEl);
 };
@@ -140,6 +143,34 @@ const renderRecent = () => {
 
   containerEl.appendChild(recentItemListEl);
 };
+
+const filterList = (arr, data) => {
+  switch (data) {
+    case "popular":
+      return arr.filter((x) => x.isPopular);
+    case "recent":
+      return arr.filter((x) => x.isRecent);
+  }
+  // return arr.filter(x => )
+};
+
+// const filterAndRenderList = (array, filterData) => {
+//   console.log("renderFilteredList ===>");
+
+//   let filteredArray = [];
+
+//   switch (filterData) {
+//     case "popular":
+//       filteredArray = array.filter((x) => x.isPopular);
+//       break;
+//     case "recent":
+//       filteredArray = array.filter((x) => x.isRecent);
+//   }
+
+//   console.log(filteredArray);
+// };
+
+// renderFilteredList(collection, "popular");
 
 const renderListItem = ({ item }) => {
   console.log("renderListItem ====>", item);
@@ -222,6 +253,6 @@ const updateListItemElm = () => {
   });
 };
 
-renderPopular();
+renderList();
 
 updateListItemElm();
