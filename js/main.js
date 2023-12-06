@@ -94,7 +94,16 @@ const handleMainClick = (e) => {
   if (target.closest(".list-item")) {
     let id = target.closest(".list-item").id;
 
-    console.log("id >>>>", id);
+    navigateToList(id);
+  }
+};
+
+const navigateToList = (listId) => {
+  console.log("navigateToList ===>");
+
+  if (lists.some((list) => list.id === parseInt(listId))) {
+    const found = lists.find((list) => list.id === parseInt(listId));
+    window.location.href = `http://localhost:5500/list.html?id=${found.id}`;
   }
 };
 
