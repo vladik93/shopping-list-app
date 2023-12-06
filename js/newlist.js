@@ -166,14 +166,21 @@ const addNewList = (title) => {
 
   newListInputValue = "";
 
-  navigateToNewListPage(newList);
+  if (lists.some((listItem) => listItem.id === newList.id)) {
+    console.log("listId Found >>>>");
+    navigateToNewListPage(newList.id);
+  }
+
+  // navigateToNewListPage(newList.id);
 };
 
-const navigateToNewListPage = (newList) => {
+const navigateToNewListPage = (newListId) => {
   console.log("navigateToNewListPage ===>");
-  const searchParams = new URLSearchParams({ id: newList.id });
+  const searchParams = new URLSearchParams({ id: newListId });
+  console.log("searchParams >>>", searchParams);
 
   const queryString = searchParams.toString();
+  console.log("queryString >>>", queryString);
 
   window.location.href = newListUrl + queryString;
 };

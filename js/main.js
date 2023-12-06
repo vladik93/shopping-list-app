@@ -69,6 +69,8 @@ const generateLists = () => {
 
   mainEl.appendChild(newListButtonEl);
 
+  mainEl.addEventListener("click", handleMainClick);
+
   newListButtonEl.addEventListener("click", () => {
     document.location.assign("./newlist.html");
   });
@@ -83,6 +85,17 @@ const addList = () => {
   lists.push(list);
 
   generateLists();
+};
+
+const handleMainClick = (e) => {
+  console.log("handleMainClick ===>");
+  let target = e.target;
+
+  if (target.closest(".list-item")) {
+    let id = target.closest(".list-item").id;
+
+    console.log("id >>>>", id);
+  }
 };
 
 generateLists();

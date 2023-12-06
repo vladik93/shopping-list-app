@@ -21,9 +21,18 @@ let newItemUrl = "http://localhost:5500/newitem.html?";
 
 console.log(lists);
 
+// window.addEventListener("DOMContentLoaded", () => {
+//   localStorage.setItem("CURRENT_LIST", listId);
+// });
+
 function renderListPage(listId) {
   console.log("renderListPage ===>");
   console.log("elm param ====>", listId);
+
+  console.log(
+    "lists.some ===>",
+    !!lists.some((item) => item.id === parseInt(listId))
+  );
   if (lists.some((item) => item.id === parseInt(listId))) {
     const found = lists.find((item) => item.id === parseInt(listId));
 
@@ -43,7 +52,6 @@ function renderListPage(listId) {
             <span>ADD</span>
           </button>
         </div>
-    
     `;
 
     containerEl.appendChild(listPageEl);
@@ -70,3 +78,7 @@ const navigateToNewTasksPage = (listId) => {
 };
 
 renderListPage(listId);
+
+// window.addEventListener("beforeunload", () => {
+//   localStorage.removeItem("CURRENT_LIST");
+// });

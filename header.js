@@ -22,6 +22,8 @@ const mainHeaderOpts = setHeaderOptions("My Lists", true, [
 
 const newListOpts = setHeaderOptions("", false, []);
 
+const listOpts = setHeaderOptions();
+
 /**
  * Renders the header element in a page based on the current URL.
  */
