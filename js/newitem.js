@@ -31,15 +31,18 @@ const handleContainerClick = (e) => {
 
   if (target.closest("#add-item-button")) {
     let inputVal = newItemInputEl.value;
+    console.log("add-item-input >>", inputVal);
 
     addListItem(inputVal);
+
+    newItemInputFlag = false;
   }
 };
 
 containerEl.addEventListener("click", handleContainerClick);
 
 const handleItemHeaderInput = (e) => {
-  console.log("handleItemHeaderSearch ===>");
+  console.log("handleItemHeaderInput ===>");
 
   let target = e.target;
   let dataInput = e.target.dataset.input;
@@ -49,7 +52,6 @@ const handleItemHeaderInput = (e) => {
     target.value = inputValue;
 
     if (inputValue.length) {
-      console.log("inputValue ===>", "not empty");
       if (!newItemInputFlag) {
         newItemInputFlag = true;
 
@@ -67,6 +69,8 @@ const handleItemHeaderInput = (e) => {
 newItemInputEl.addEventListener("input", handleItemHeaderInput);
 
 const renderAddItemButton = () => {
+  console.log("renderAddItemButton ===>");
+
   let addItemButtonEl = `<button class="add-item-button button button--primary" id="add-item-button"><i class="fa-solid fa-check icon"></i></button>`;
 
   containerEl.innerHTML += addItemButtonEl;
@@ -94,7 +98,7 @@ const handleItemHeaderTabsClick = (e) => {
 itemHeaderTabsEl.addEventListener("click", handleItemHeaderTabsClick);
 
 const renderList = () => {
-  console.log("renderList f ===>");
+  console.log("renderList ===>");
   const selectedTab = document.querySelector(".item-header-tab.active");
 
   let data = selectedTab.dataset.tab;
@@ -118,30 +122,10 @@ const renderList = () => {
   });
 
   containerEl.appendChild(popularItemListEl);
-};
 
-const renderRecent = () => {
-  containerEl.innerHTML = "";
-  const recentItemListEl = document.createElement("div");
-  recentItemListEl.classList.add("item-list", "recent");
-
-  collection
-    .filter((x) => x.isRecent)
-    .map((item, index) => {
-      const listItemEl = document.createElement("div");
-      listItemEl.classList.add("list-item");
-      listItemEl.dataset.listItemAction = "add";
-      listItemEl.dataset.listItemId = index;
-      listItemEl.dataset.listItemValue = item.item;
-
-      listItemEl.innerHTML += renderListItem(item);
-
-      recentItemListEl.appendChild(listItemEl);
-
-      listItemEl.addEventListener("click", handleListItemClick);
-    });
-
-  containerEl.appendChild(recentItemListEl);
+  // updateListItemElm();
+  // handleItemHeaderInput();
+  newItemInputEl.addEventListener("input", handleItemHeaderInput);
 };
 
 const filterList = (arr, data) => {
@@ -151,29 +135,10 @@ const filterList = (arr, data) => {
     case "recent":
       return arr.filter((x) => x.isRecent);
   }
-  // return arr.filter(x => )
 };
 
-// const filterAndRenderList = (array, filterData) => {
-//   console.log("renderFilteredList ===>");
-
-//   let filteredArray = [];
-
-//   switch (filterData) {
-//     case "popular":
-//       filteredArray = array.filter((x) => x.isPopular);
-//       break;
-//     case "recent":
-//       filteredArray = array.filter((x) => x.isRecent);
-//   }
-
-//   console.log(filteredArray);
-// };
-
-// renderFilteredList(collection, "popular");
-
 const renderListItem = ({ item }) => {
-  console.log("renderListItem ====>", item);
+  console.log("renderListItem ====>");
   const listItemTemplate = `
     <div class="list-item-content">
       <span><i class="fa-solid fa-plus icon"></i></span> 
@@ -207,16 +172,17 @@ const addToItemCollection = (title) => {
     dateAdded: new Date(),
   };
 
-  console.log("newItem ===>", newItem);
   collection.push(newItem);
 
   localStorage.setItem("COLLECTION", JSON.stringify(collection));
 
   newItemInputEl.value = "";
+
+  renderList();
 };
 
 const addListItem = (title) => {
-  console.log("createListItem ===>");
+  console.log("addListItem ===>");
   if (items.some((item) => item.title === title)) return;
 
   let listItem = {
@@ -231,13 +197,11 @@ const addListItem = (title) => {
 
   localStorage.setItem("ITEMS", JSON.stringify(items));
 
-  console.log("items[item.length - 1] ===>", items[items.length - 1]);
   addToItemCollection(items[items.length - 1].title);
-
-  // updateListItemElm();
 };
 
 const updateListItemElm = () => {
+  console.log("updateListItemElm ===>");
   let listItemEls = document.querySelectorAll(".list-item");
 
   listItemEls.forEach((listItem) => {

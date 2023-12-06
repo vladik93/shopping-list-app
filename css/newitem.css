@@ -85,7 +85,7 @@
 }
 
 .list-item.active span {
-  background: red;
+  background: var(--color--primary);
 }
 
 .add-item-button {
