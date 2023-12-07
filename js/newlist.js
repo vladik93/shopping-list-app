@@ -42,10 +42,10 @@ const renderNewListInput = () => {
   const newListInputWrapper = document.createElement("div");
   newListInputWrapper.classList.add("new-list-input-wrapper");
 
-  newListInputWrapper.innerHTML = `<input type="text" value="${newListInputValue}" class="input input--full" data-input="new-list" />`;
+  newListInputWrapper.innerHTML = `<input type="text" class="input input--full" data-input="new-list" />`;
   containerEl.appendChild(newListInputWrapper);
 
-  newListInputWrapper.addEventListener("change", handleNewListInputChange);
+  newListInputWrapper.addEventListener("input", handleNewListInputChange);
 };
 
 /**
@@ -113,15 +113,12 @@ const renderNewListPage = () => {
  * @param {*} event - input event
  */
 const handleNewListInputChange = (e) => {
+  console.log("handleNewListInputChange >>>>");
   let target = e.target;
-  let input = target.dataset.input;
 
-  if (input === "new-list") {
-    let value = target.value;
-    newListInputValue = value;
+  if (target.closest('[data-input="new-list"]')) {
+    newListInputValue = document.querySelector('[data-input="new-list"]').value;
   }
-
-  console.log(newListInputValue);
 };
 
 /**
@@ -140,20 +137,22 @@ const handleSuggestionsClick = (e) => {
 };
 
 const handleNewListButtonClick = (e) => {
-  console.log("handleNewListButtonClick ===>");
+  console.log("handleNewListButtonClick >>>>");
 
   let listTitle = newListInputValue;
+  console.log("listTitle ===>", listTitle);
 
   let target = e.target;
   let action = target.dataset.buttonAction;
 
   if (action === "create") {
     addNewList(listTitle);
+    console.log("addNewList init ===>");
   }
 };
 
 const addNewList = (title) => {
-  console.log("addNewList ===> ");
+  console.log("addNewList >>>");
   let newList = {
     id: new Date().getTime(),
     dateAdded: new Date(),
@@ -164,14 +163,12 @@ const addNewList = (title) => {
 
   localStorage.setItem("LISTS", JSON.stringify(lists));
 
-  newListInputValue = "";
+  document.querySelector('[data-input="new-list"]').value = "";
 
-  if (lists.some((listItem) => listItem.id === newList.id)) {
-    console.log("listId Found >>>>");
-    navigateToNewListPage(newList.id);
-  }
-
-  // navigateToNewListPage(newList.id);
+  // if (lists.some((list) => list.id === newList.id)) {
+  //   let { id } = lists.find((list) => list.id === newList.id);
+  //   navigateToNewListPage(id);
+  // }
 };
 
 const navigateToNewListPage = (newListId) => {

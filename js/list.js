@@ -71,7 +71,6 @@ const handleListPageClick = (e) => {
 
 const navigateToNewTasksPage = (listId) => {
   const searchParams = new URLSearchParams({ id: listId });
-
   const queryString = searchParams.toString();
 
   window.location.href = newItemUrl + queryString;
