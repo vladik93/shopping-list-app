@@ -1,9 +1,6 @@
 console.log("~ list.js ~");
 
 import { lists } from "../data.js";
-import { renderHeader } from "../header.js";
-
-// renderHeader();
 
 const containerEl = document.querySelector(".container");
 

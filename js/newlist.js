@@ -1,4 +1,4 @@
-import { includeHeader } from "../header.js";
+import { renderHeader } from "../header.js";
 import { suggestions, lists, icons } from "../data.js";
 
 const containerEl = document.querySelector(".container");
@@ -8,8 +8,6 @@ const containerEl = document.querySelector(".container");
 let newListInputValue = "";
 
 let newListUrl = "http://localhost:5500/list.html?";
-
-includeHeader();
 
 /**
  * Generates a random icon.

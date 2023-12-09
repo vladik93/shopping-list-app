@@ -3,8 +3,6 @@ import { renderHeader } from "../header.js";
 
 const containerEl = document.querySelector(".container");
 
-// renderHeader();
-
 const generateLists = () => {
   const mainEl = document.createElement("main");
   mainEl.classList.add("main");
