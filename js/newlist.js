@@ -146,8 +146,8 @@ const handleNewListButtonClick = (e) => {
   let action = target.dataset.buttonAction;
 
   if (action === "create") {
+    // addNewList(listTitle);
     addNewList(listTitle);
-    console.log("addNewList init ===>");
   }
 };
 
@@ -163,23 +163,25 @@ const addNewList = (title) => {
 
   localStorage.setItem("LISTS", JSON.stringify(lists));
 
-  document.querySelector('[data-input="new-list"]').value = "";
+  // document.querySelector('[data-input="new-list"]').value = "";
 
-  // if (lists.some((list) => list.id === newList.id)) {
-  //   let { id } = lists.find((list) => list.id === newList.id);
-  //   navigateToNewListPage(id);
-  // }
+  navigateToNewListPage(newList.id);
 };
 
 const navigateToNewListPage = (newListId) => {
   console.log("navigateToNewListPage ===>");
-  const searchParams = new URLSearchParams({ id: newListId });
-  console.log("searchParams >>>", searchParams);
 
-  const queryString = searchParams.toString();
-  console.log("queryString >>>", queryString);
+  if (lists.find((list) => list.id == newListId)) {
+    console.log("id found ===>", newListId);
 
-  window.location.href = newListUrl + queryString;
+    // window.location.href = "/";
+
+    const searchParams = new URLSearchParams({ id: newListId });
+
+    const queryString = searchParams.toString();
+
+    window.location.href = newListUrl + queryString;
+  }
 };
 
 // INVOKED FUNCTIONS

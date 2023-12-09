@@ -1,4 +1,5 @@
-import { getCurrentTime } from "./functions.js";
+console.log("~ header.js available for export ~");
+
 const containerEl = document.querySelector(".container");
 
 console.log(containerEl, document.location.href);
