@@ -23,7 +23,7 @@ const mainHeaderOpts = setHeaderOptions("My Lists", true, [
 
 const newListOpts = setHeaderOptions("", false, []);
 
-const listOpts = setHeaderOptions();
+const listOpts = setHeaderOptions("My List", false, []);
 
 /**
  * Renders the header element in a page based on the current URL.
@@ -37,7 +37,7 @@ export const includeHeader = () => {
       renderDynamicHeader(newListOpts);
       break;
     case "/list.html":
-      renderDynamicHeader(mainHeaderOpts);
+      renderDynamicHeader(listOpts);
       break;
   }
 };
