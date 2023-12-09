@@ -1,96 +1,60 @@
-console.log("~ header.js available for export ~");
+console.log("~ header.js ~");
 
 const containerEl = document.querySelector(".container");
 
-console.log(containerEl, document.location.href);
+const setHeaderSettings = (mainBtn = {}, title = "", actions = []) => {
+  console.log("<<< setHeaderSettings >>>");
 
-const setHeaderOptions = (title, isToggler, actions = []) => {
-  let headerOptions = {
-    title,
-    isToggler: isToggler,
-    actionsArr: [],
-  };
+  mainBtn.icon = mainBtn.icon;
+  mainBtn.url = mainBtn.url;
 
-  actions.map((action) => headerOptions.actionsArr.push(action));
+  title = title;
 
-  return headerOptions;
+  const actionsArray = [];
+  actions.forEach((action) => actionsArray.push(action));
+
+  return { mainBtn, title, actionsArray };
 };
 
-const mainHeaderOpts = setHeaderOptions("My Lists", true, [
-  { action: "list-share", icon: "user-plus" },
-  { action: "account-open", icon: "envelope" },
-]);
+const listPageSettings = setHeaderSettings(
+  { icon: "arrow-left", url: "/" },
+  "my list",
+  []
+);
 
-const newListOpts = setHeaderOptions("", false, []);
+export const renderHeader = ({
+  mainBtn: { url, icon },
+  title,
+  actions = [],
+}) => {
+  console.log("renderHeader >>>");
 
-const listOpts = setHeaderOptions("My List", false, []);
-
-/**
- * Renders the header element in a page based on the current URL.
- */
-export const includeHeader = () => {
-  switch (window.location.pathname) {
-    case "/":
-      renderDynamicHeader(mainHeaderOpts);
-      break;
-    case "/newlist.html":
-      renderDynamicHeader(newListOpts);
-      break;
-    case "/list.html":
-      renderDynamicHeader(listOpts);
-      break;
-  }
-};
-
-const renderDynamicHeader = ({ title, isToggler, actionsArr }) => {
-  console.log("renderDynamicHeader ===>");
   const headerEl = document.createElement("header");
   headerEl.classList.add("header");
 
-  if (isToggler) {
-    headerEl.innerHTML += `<button class="button--icon header-sidenav-button">
-      <i class="fa-solid fa-bars icon--md">
-    </button>`;
-  } else {
-    headerEl.innerHTML += `<button class="button--icon header-sidenav-button" data-header-action="back">
-      <i class="fa-solid fa-arrow-left icon--md"></i>
-    </button>`;
-  }
+  headerEl.innerHTML = `
+    <button class="button--icon header-main-button" data-main-button data-button-url=${url}>
+      <i class="fa-solid fa-${icon} icon--md">
+    </button>
+    
+    `;
 
-  headerEl.innerHTML += `<h3 class="header-title">${title}</h3>`;
+  containerEl.appendChild(headerEl);
 
-  const headerActionsEl = document.createElement("div");
-  headerActionsEl.classList.add("header-actions");
-  headerEl.appendChild(headerActionsEl);
-
-  headerActionsEl.innerHTML += actionsArr
-    .map((action) => {
-      return `<button class="header-action button--icon">
-      <i class="fa-solid fa-${action.icon} icon--md"></i>
-    </button>`;
-    })
-    .join("");
-
-  headerEl.appendChild(headerActionsEl);
-
-  console.log("before container append ====>");
-  document.body.insertAdjacentElement("afterbegin", headerEl);
-
-  headerEl.addEventListener("click", handleHeader);
+  headerEl.addEventListener("click", handleHeaderClick);
 };
 
-const handleHeader = (e) => {
+const handleHeaderClick = (e) => {
+  console.log("handleHeaderClick >>>");
+
   let target = e.target;
-  let targetParent = target.parentElement;
 
-  let headerAction = targetParent.dataset.headerAction;
+  if (target.closest("[data-main-button]")) {
+    const headerMainBtn = document.querySelector("[data-main-button]");
+    const buttonUrl = headerMainBtn.dataset.buttonUrl;
 
-  if (headerAction === "back") {
-    handleBackButtonClick();
+    window.location.href = buttonUrl;
   }
 };
 
-const handleBackButtonClick = () => {
-  history.back();
-  sessionStorage.clear();
-};
+renderHeader(listPageSettings);

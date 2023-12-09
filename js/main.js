@@ -1,9 +1,9 @@
 import { lists } from "../data.js";
-import { includeHeader } from "../header.js";
+import { renderHeader } from "../header.js";
 
 const containerEl = document.querySelector(".container");
 
-includeHeader();
+// renderHeader();
 
 const generateLists = () => {
   const mainEl = document.createElement("main");

@@ -1,9 +1,9 @@
-console.log("<<<< list.js >>>>");
+console.log("~ list.js ~");
 
 import { lists } from "../data.js";
-import { includeHeader } from "../header.js";
+import { renderHeader } from "../header.js";
 
-includeHeader();
+// renderHeader();
 
 const containerEl = document.querySelector(".container");
 
