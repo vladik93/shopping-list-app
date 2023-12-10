@@ -54,6 +54,13 @@ const mainPageSettings = setHeaderSettings(
   [{ icon: "gift" }, { icon: "bolt" }]
 );
 
+const newListSettings = setHeaderSettings(
+  "new-list",
+  { icon: "arrow-left", url: "/", data: "new-list" },
+  "",
+  []
+);
+
 export const renderHeader = (headerSettingsObject) => {
   console.log("renderHeader >>>");
 
@@ -97,6 +104,10 @@ const handleHeaderRenderByUrl = () => {
       break;
     case "/list.html":
       renderHeader(listPageSettings);
+      break;
+    case "/newlist.html":
+      renderHeader(newListSettings);
+      break;
   }
 };
 

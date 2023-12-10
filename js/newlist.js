@@ -42,7 +42,8 @@ const renderNewListInput = () => {
   const newListInputWrapper = document.createElement("div");
   newListInputWrapper.classList.add("new-list-input-wrapper");
 
-  newListInputWrapper.innerHTML = `<input type="text" class="input input--full" data-input="new-list" value="${newListInputValue}" />`;
+  newListInputWrapper.innerHTML = `
+  <input type="text" class="input input--full" data-input="new-list" value="${newListInputValue}" placeholder="New List" />`;
   containerEl.appendChild(newListInputWrapper);
 
   newListInputWrapper.addEventListener("input", handleNewListInputChange);
@@ -159,6 +160,7 @@ const handleNewListButtonClick = (e) => {
 
 const addNewList = (title) => {
   console.log("addNewList >>>");
+
   let newList = {
     id: new Date().getTime(),
     dateAdded: new Date(),
