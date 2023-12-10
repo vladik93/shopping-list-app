@@ -1,6 +1,8 @@
 import { renderHeader } from "../header.js";
 import { suggestions, lists, icons } from "../data.js";
 
+console.log("<<< newList.js >>");
+
 const containerEl = document.querySelector(".container");
 
 // CONTAINER EVENT LISTENERS
@@ -40,7 +42,7 @@ const renderNewListInput = () => {
   const newListInputWrapper = document.createElement("div");
   newListInputWrapper.classList.add("new-list-input-wrapper");
 
-  newListInputWrapper.innerHTML = `<input type="text" class="input input--full" data-input="new-list" />`;
+  newListInputWrapper.innerHTML = `<input type="text" class="input input--full" data-input="new-list" value="${newListInputValue}" />`;
   containerEl.appendChild(newListInputWrapper);
 
   newListInputWrapper.addEventListener("input", handleNewListInputChange);
@@ -63,6 +65,7 @@ const renderSuggestionButton = (suggestion) => {
  */
 
 const renderSuggestions = () => {
+  console.log("renderSuggestions ===>");
   const suggestionsWrapperEl = document.createElement("div");
   suggestionsWrapperEl.classList.add("suggestions-wrapper");
 
@@ -85,6 +88,7 @@ const renderSuggestions = () => {
  * Renders the button for creating the new list.
  */
 const renderNewListButton = () => {
+  console.log("renderNewListButton ===>");
   const newListButtonWrapperEl = document.createElement("div");
   newListButtonWrapperEl.classList.add("new-list-button-wrapper");
   newListButtonWrapperEl.innerHTML = `<button class="new-list-button button--full button button--primary" data-button-action='create'>CREATE</button>`;
@@ -125,9 +129,13 @@ const handleNewListInputChange = (e) => {
  */
 
 const handleSuggestionsClick = (e) => {
+  console.log("handleSuggestionsClick ===>");
   let target = e.target;
-  if (target.dataset.suggestion) {
-    let value = target.dataset.suggestion;
+
+  if (target.closest(`[data-suggestion]`)) {
+    let value = target.closest(`[data-suggestion]`).innerText;
+
+    // let value = target.dataset.suggestion;
     newListInputValue = value;
   }
 
