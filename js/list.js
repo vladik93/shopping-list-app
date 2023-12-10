@@ -38,3 +38,7 @@ const renderListPage = (listPageId) => {
 };
 
 renderListPage(listId);
+
+// window.addEventListener("beforeunload", () => {
+//   localStorage.removeItem("CURRENT_LIST");
+// });

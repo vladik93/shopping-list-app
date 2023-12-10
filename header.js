@@ -1,11 +1,33 @@
 console.log("~ header.js ~");
 
+import { lists } from "./data.js";
+
 const containerEl = document.querySelector(".container");
 
-console.log("container ===>", containerEl);
+// document.addEventListener("DOMContentLoaded", () => {
 
-const setHeaderSettings = (mainBtn = {}, title = "", actions = []) => {
+const currentListId = JSON.parse(localStorage.getItem("CURRENT_LIST_ID"));
+
+const getCurrentList = () => {
+  if (currentListId !== null) {
+    const found = lists.find((list) => list.id === currentListId);
+
+    console.log("found ==>", found);
+
+    return found;
+  }
+};
+
+let currentList = getCurrentList() || {};
+
+console.log("currentList ===>", currentList);
+
+const setHeaderSettings = (id = "", mainBtn = {}, title = "", actions = []) => {
   console.log("<<< setHeaderSettings >>>");
+
+  console.log("currentList ===>", currentList);
+
+  id = id;
 
   mainBtn.icon = mainBtn.icon;
   mainBtn.url = mainBtn.url;
@@ -19,22 +41,24 @@ const setHeaderSettings = (mainBtn = {}, title = "", actions = []) => {
 };
 
 const listPageSettings = setHeaderSettings(
-  { icon: "arrow-left", url: "/" },
-  "my list",
-  [{ icon: "user-plus" }, { icon: "gift" }]
+  "list-page",
+  { icon: "arrow-left", url: "/", data: "list" },
+  currentList.title,
+  [({ icon: "user-plus" }, { icon: "gift" })]
 );
 
 const mainPageSettings = setHeaderSettings(
+  "main",
   { icon: "bars", url: "#" },
   "My Lists",
-  [{ icon: "gift" }]
+  [{ icon: "gift" }, { icon: "bolt" }]
 );
 
 export const renderHeader = (headerSettingsObject) => {
   console.log("renderHeader >>>");
 
   const {
-    mainBtn: { url, icon },
+    mainBtn: { url, icon, data },
     title,
     actionsArray,
   } = headerSettingsObject;
@@ -45,7 +69,7 @@ export const renderHeader = (headerSettingsObject) => {
   headerEl.classList.add("header");
 
   headerEl.innerHTML = `
-    <button class="button--icon header-main-button" data-main-button data-button-url=${url}>
+    <button class="button--icon header-main-button" data-main-button data-button=${data} data-button-url=${url}>
       <i class="fa-solid fa-${icon} icon--md"></i>
     </button>
     <h3 class="header-title">${title}</h3>
@@ -80,10 +104,13 @@ const handleHeaderClick = (e) => {
   console.log("handleHeaderClick >>>");
 
   let target = e.target;
+  let buttonData = target.dataset;
 
-  if (target.closest("[data-main-button]")) {
+  if (target.closest("[data-button='list']")) {
     const headerMainBtn = document.querySelector("[data-main-button]");
     const buttonUrl = headerMainBtn.dataset.buttonUrl;
+
+    localStorage.removeItem("CURRENT_LIST_ID");
 
     window.location.href = buttonUrl;
   }

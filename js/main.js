@@ -101,6 +101,9 @@ const navigateToList = (listId) => {
 
   if (lists.some((list) => list.id === parseInt(listId))) {
     const found = lists.find((list) => list.id === parseInt(listId));
+
+    localStorage.setItem("CURRENT_LIST_ID", JSON.stringify(found.id));
+
     window.location.href = `http://localhost:5500/list.html?id=${found.id}`;
   }
 };
