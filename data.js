@@ -1,5 +1,7 @@
 console.log("~ data.js available for export ~");
 
+export const host = 5500;
+
 export let lists = JSON.parse(localStorage.getItem("LISTS")) || [];
 
 export let items = JSON.parse(localStorage.getItem("ITEMS")) || [];

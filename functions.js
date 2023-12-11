@@ -1,3 +1,5 @@
+import { host } from "./data.js";
+
 /**
  * A function for logging the current time (in milliseconds).
  */
@@ -25,4 +27,10 @@ export const navigateToPage = (pageName) => {
   let url = pageName !== undefined ? `${localUrl}/${pageName}.html` : localUrl;
 
   window.location.href = url;
+};
+
+export const navigateToPageWithId = (url, id) => {
+  const searchParams = new URLSearchParams({ id });
+  const queryString = searchParams.toString();
+  window.location.href = `http://localhost:${host}/${url}.html?` + queryString;
 };

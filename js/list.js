@@ -1,6 +1,7 @@
 console.log("~ list.js ~");
 
 import { lists, icons } from "../data.js";
+import { navigateToPageWithId } from "../functions.js";
 
 const containerEl = document.querySelector(".container");
 
@@ -43,7 +44,7 @@ const renderListPage = (listPageId) => {
     <p class="secondary-text">Tap the plus button to create your first list</p>
       
     <div class="list-button-wrapper">
-      <button class="add-item-button button button--lg button--primary" id="add-item">
+      <button class="add-item-button button button--lg button--primary" id="add-item" data-button-action="add-item">
         <i class="fa-solid fa-plus"></i>
         <span>ADD</span>
       </button>
@@ -51,6 +52,18 @@ const renderListPage = (listPageId) => {
     `;
 
     containerEl.appendChild(listPageEl);
+
+    listPageEl.addEventListener("click", handleListPageClick);
+  }
+};
+
+const handleListPageClick = (e) => {
+  console.log("handleListPageClick >>>");
+
+  let target = e.target;
+
+  if (target.closest("[data-button-action='add-item']")) {
+    navigateToPageWithId("newitem", listId);
   }
 };
 
