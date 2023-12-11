@@ -25,8 +25,6 @@ console.log("currentList ===>", currentList);
 const setHeaderSettings = (id = "", mainBtn = {}, title = "", actions = []) => {
   console.log("<<< setHeaderSettings >>>");
 
-  console.log("currentList ===>", currentList);
-
   id = id;
 
   mainBtn.icon = mainBtn.icon;
@@ -115,15 +113,24 @@ const handleHeaderClick = (e) => {
   console.log("handleHeaderClick >>>");
 
   let target = e.target;
-  let buttonData = target.dataset;
 
   if (target.closest("[data-button='list']")) {
-    const headerMainBtn = document.querySelector("[data-main-button]");
-    const buttonUrl = headerMainBtn.dataset.buttonUrl;
+    const headerMainBtn = target.closest("[data-button='list']");
+    const data = headerMainBtn.dataset.buttonUrl;
 
     localStorage.removeItem("CURRENT_LIST_ID");
+    sessionStorage.removeItem("isNewListPage");
+    sessionStorage.removeItem("randomIconIndex");
 
-    window.location.href = buttonUrl;
+    window.location.href = data;
+  } else if (target.closest("[data-button='new-list']")) {
+    const headerMainBtn = target.closest("[data-button='new-list']");
+    const data = headerMainBtn.dataset.buttonUrl;
+
+    sessionStorage.removeItem("isNewListPage");
+    sessionStorage.removeItem("randomIconIndex");
+
+    window.location.href = data;
   }
 };
 

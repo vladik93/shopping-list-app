@@ -15,7 +15,18 @@ export const suggestions = [
   "supermarket",
 ];
 
-export const icons = ["fish", "cheese", "carrot", "pizza-slice", "cookie"];
+export const icons = [
+  "fish",
+  "cheese",
+  "carrot",
+  "pizza-slice",
+  "cookie",
+  "bowl-food",
+  "burger",
+  "egg",
+  "ice-cream",
+  "martini-glass-citrus",
+];
 
 let collectionArr = [
   {

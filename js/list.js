@@ -1,6 +1,6 @@
 console.log("~ list.js ~");
 
-import { lists } from "../data.js";
+import { lists, icons } from "../data.js";
 
 const containerEl = document.querySelector(".container");
 
@@ -10,6 +10,23 @@ const entries = new URLSearchParams(searchParams).values();
 const array = Array.from(entries);
 
 const listId = array[0];
+
+const getRandomIconIndex = () => {
+  console.log("getRandomIconIndex >>>");
+  let index = undefined;
+  const storage = sessionStorage.getItem("randomIconIndex");
+  if (storage !== null) {
+    console.log("storage found!");
+    index = storage;
+  } else {
+    console.log("storage not found!");
+    index = Math.floor(Math.random() * icons.length);
+  }
+
+  return index;
+};
+
+const randomIconIndex = getRandomIconIndex();
 
 const renderListPage = (listPageId) => {
   console.log("renderListPage >>>");
@@ -21,7 +38,7 @@ const renderListPage = (listPageId) => {
     listPageEl.classList.add("list-page-wrapper");
 
     listPageEl.innerHTML = `
-    <i class="fa-solid fa-carrot icon--mdx3 list-icon"></i>
+    <i class="fa-solid fa-${icons[randomIconIndex]} icon--mdx3 list-icon"></i>
     <p class="primary-text main-title">Let's plan your shopping</p>
     <p class="secondary-text">Tap the plus button to create your first list</p>
       

@@ -15,6 +15,7 @@ let newListUrl = "http://localhost:5500/list.html?";
  * Generates a random icon.
  */
 const renderRandomIcon = () => {
+  console.log("renderRandomIcon >>>");
   let index =
     sessionStorage.getItem("randomIconIndex") ||
     Math.floor(Math.random() * icons.length);
