@@ -22,6 +22,7 @@ const getRandomIconIndex = () => {
   } else {
     console.log("storage not found!");
     index = Math.floor(Math.random() * icons.length);
+    sessionStorage.setItem("randomIconIndex", index);
   }
 
   return index;
