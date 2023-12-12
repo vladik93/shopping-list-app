@@ -29,8 +29,9 @@ export const navigateToPage = (pageName) => {
   window.location.href = url;
 };
 
-export const navigateToPageWithId = (url, id) => {
+export const navigateToPageWithId = (pageName, id) => {
   const searchParams = new URLSearchParams({ id });
   const queryString = searchParams.toString();
-  window.location.href = `http://localhost:${host}/${url}.html?` + queryString;
+  window.location.href =
+    `http://localhost:${host}/${pageName}.html?` + queryString;
 };

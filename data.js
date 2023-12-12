@@ -6,6 +6,8 @@ export let lists = JSON.parse(localStorage.getItem("LISTS")) || [];
 
 export let items = JSON.parse(localStorage.getItem("ITEMS")) || [];
 
+export let collection = JSON.parse(localStorage.getItem("COLLECTION")) || [];
+
 console.log("items ===>", items);
 
 export const suggestions = [
@@ -30,81 +32,18 @@ export const icons = [
   "martini-glass-citrus",
 ];
 
-let collectionArr = [
-  {
-    id: 0,
-    item: "turkey",
-    isPopular: true,
-    isRecent: false,
+const addToCollection = (title) => {
+  let item = {
+    id: new Date().getTime(),
+    title,
     dateAdded: new Date(),
-  },
-  {
-    id: 1,
-    item: "bread",
-    isPopular: true,
-    isRecent: false,
-    dateAdded: new Date(),
-  },
-  {
-    id: 2,
-    item: "cheese",
-    isPopular: true,
-    isRecent: false,
-    dateAdded: new Date(),
-  },
-  {
-    id: 4,
-    item: "chicken",
-    isPopular: true,
-    isRecent: false,
-    dateAdded: new Date("2015-03-25"),
-  },
-  {
-    id: 5,
-    item: "blouse",
-    isPopular: true,
-    isRecent: false,
-    dateAdded: new Date("2015-03-25"),
-  },
-  {
-    id: 6,
-    item: "butter",
-    isPopular: true,
-    isRecent: false,
-    dateAdded: new Date("2023-12-04"),
-  },
-  {
-    id: 7,
-    item: "potatoes",
-    isPopular: true,
-    isRecent: false,
-    dateAdded: new Date("2015-03-25"),
-  },
-  {
-    id: 8,
-    item: "eggs",
-    isPopular: true,
-    isRecent: false,
-    dateAdded: new Date("2015-03-25"),
-  },
-  {
-    id: 9,
-    item: "toothpaste",
-    isPopular: true,
-    isRecent: false,
-    dateAdded: new Date("2015-03-25"),
-  },
-  {
-    id: 10,
-    item: "deodorant",
-    isPopular: true,
-    isRecent: false,
-    dateAdded: new Date("2023-12-01"),
-  },
-];
+  };
 
-export let collection =
-  JSON.parse(localStorage.getItem("COLLECTION")) || collectionArr;
+  collection.push(item);
+  localStorage.setItem("COLLECTION", JSON.stringify(collection));
+};
+
+addToCollection("chocolate");
 
 // const updateIsRecent = () => {
 //   console.log("updateIsRecent ====>", new Date());

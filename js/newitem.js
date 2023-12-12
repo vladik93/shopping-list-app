@@ -1,4 +1,5 @@
 import { collection, items } from "../data.js";
+import { navigateToPageWithId } from "../functions.js";
 
 const itemHeaderEl = document.getElementById("item-header");
 
@@ -18,12 +19,19 @@ const paramsArray = Array.from(entries);
 
 const listId = paramsArray[0];
 
-// Setting dynamic padding for container elm. based on header height
+const handleItemHeaderClick = (e) => {
+  console.log("handleItemHeaderClick >>>");
 
-document.addEventListener("DOMContentLoaded", () => {
-  let headerHeight = itemHeaderEl.getBoundingClientRect().height;
-  containerEl.style.paddingTop = headerHeight + "px";
-});
+  let target = e.target;
+
+  if (target.closest("[data-button-action='back']")) {
+    e.preventDefault();
+
+    navigateToPageWithId("list", listId);
+  }
+};
+
+itemHeaderEl.addEventListener("click", handleItemHeaderClick);
 
 const handleContainerClick = (e) => {
   console.log("handleContainerClick ===>");
