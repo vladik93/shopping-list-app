@@ -3,7 +3,7 @@ console.log("~ list.js ~");
 import { lists, icons } from "../data.js";
 import { navigateToPageWithId } from "../functions.js";
 
-const containerEl = document.querySelector(".container");
+// const containerEl = document.querySelector(".container");
 
 const url = window.location.href;
 const searchParams = new URL(url).searchParams;
@@ -12,64 +12,64 @@ const array = Array.from(entries);
 
 const listId = array[0];
 
-const getRandomIconIndex = () => {
-  console.log("getRandomIconIndex >>>");
-  let index = undefined;
-  const storage = sessionStorage.getItem("randomIconIndex");
-  if (storage !== null) {
-    console.log("storage found!");
-    index = storage;
-  } else {
-    console.log("storage not found!");
-    index = Math.floor(Math.random() * icons.length);
-    sessionStorage.setItem("randomIconIndex", index);
-  }
+console.log("listId ===>", listId);
 
-  return index;
-};
+// sessionStorage.setItem("CURRENT_LIST_ID", listId);
 
-const randomIconIndex = getRandomIconIndex();
+// const getRandomIconIndex = () => {
+//   console.log("getRandomIconIndex >>>");
+//   let index = undefined;
+//   const storage = sessionStorage.getItem("randomIconIndex");
+//   if (storage !== null) {
+//     console.log("storage found!");
+//     index = storage;
+//   } else {
+//     console.log("storage not found!");
+//     index = Math.floor(Math.random() * icons.length);
+//     sessionStorage.setItem("randomIconIndex", index);
+//   }
 
-const renderListPage = (listPageId) => {
-  console.log("renderListPage >>>");
+//   return index;
+// };
 
-  if (lists.some((list) => list.id === parseInt(listPageId))) {
-    const found = lists.find((list) => list.id === parseInt(listPageId));
+// const randomIconIndex = getRandomIconIndex();
 
-    const listPageEl = document.createElement("div");
-    listPageEl.classList.add("list-page-wrapper");
+// const renderListPage = (listPageId) => {
+//   console.log("renderListPage >>>");
 
-    listPageEl.innerHTML = `
-    <i class="fa-solid fa-${icons[randomIconIndex]} icon--mdx3 list-icon"></i>
-    <p class="primary-text main-title">Let's plan your shopping</p>
-    <p class="secondary-text">Tap the plus button to create your first list</p>
-      
-    <div class="list-button-wrapper">
-      <button class="add-item-button button button--lg button--primary" id="add-item" data-button-action="add-item">
-        <i class="fa-solid fa-plus"></i>
-        <span>ADD</span>
-      </button>
-    </div>
-    `;
+//   if (lists.some((list) => list.id === parseInt(listPageId))) {
+//     const found = lists.find((list) => list.id === parseInt(listPageId));
 
-    containerEl.appendChild(listPageEl);
+//     const listPageEl = document.createElement("div");
+//     listPageEl.classList.add("list-page-wrapper");
 
-    listPageEl.addEventListener("click", handleListPageClick);
-  }
-};
+//     listPageEl.innerHTML = `
+//     <i class="fa-solid fa-${icons[randomIconIndex]} icon--mdx3 list-icon"></i>
+//     <p class="primary-text main-title">Let's plan your shopping</p>
+//     <p class="secondary-text">Tap the plus button to create your first list</p>
 
-const handleListPageClick = (e) => {
-  console.log("handleListPageClick >>>");
+//     <div class="list-button-wrapper">
+//       <button class="add-item-button button button--lg button--primary" id="add-item" data-button-action="add-item">
+//         <i class="fa-solid fa-plus"></i>
+//         <span>ADD</span>
+//       </button>
+//     </div>
+//     `;
 
-  let target = e.target;
+//     containerEl.appendChild(listPageEl);
 
-  if (target.closest("[data-button-action='add-item']")) {
-    navigateToPageWithId("newitem", listId);
-  }
-};
+//     listPageEl.addEventListener("click", handleListPageClick);
+//   }
+// };
 
-renderListPage(listId);
+// const handleListPageClick = (e) => {
+//   console.log("handleListPageClick >>>");
 
-// window.addEventListener("beforeunload", () => {
-//   localStorage.removeItem("CURRENT_LIST");
-// });
+//   let target = e.target;
+
+//   if (target.closest("[data-button-action='add-item']")) {
+//     navigateToPageWithId("newitem", listId);
+//   }
+// };
+
+// renderListPage(listId);

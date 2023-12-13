@@ -9,6 +9,8 @@ const containerEl = document.querySelector(".container");
 
 let newListInputValue = "";
 
+console.log("newListInputValue ===>", newListInputValue);
+
 let newListUrl = "http://localhost:5500/list.html?";
 
 /**
@@ -122,6 +124,8 @@ const handleNewListInputChange = (e) => {
 
   if (target.closest('[data-input="new-list"]')) {
     newListInputValue = document.querySelector('[data-input="new-list"]').value;
+
+    console.log("newListInputValue ====>", newListInputValue);
   }
 };
 
@@ -139,6 +143,8 @@ const handleSuggestionsClick = (e) => {
 
     // let value = target.dataset.suggestion;
     newListInputValue = value;
+
+    console.log("newListInputValue ===>", newListInputValue);
   }
 
   renderNewListPage();
@@ -148,6 +154,7 @@ const handleNewListButtonClick = (e) => {
   console.log("handleNewListButtonClick >>>>");
 
   let listTitle = newListInputValue;
+  console.log("newListInputValue ===>", listTitle);
 
   let target = e.target;
   let action = target.dataset.buttonAction;
@@ -171,25 +178,30 @@ const addNewList = (title) => {
 
   localStorage.setItem("LISTS", JSON.stringify(lists));
 
+  if (lists.some((list) => list.id === newList.id)) {
+    navigateToNewListPage(newList.id);
+  }
+
   // document.querySelector('[data-input="new-list"]').value = "";
 
-  navigateToNewListPage(newList.id);
+  // if (lists.some((list) => list.id === newList.id)) {
+  // navigateToNewListPage(newList.id);
+  // }
 };
 
 const navigateToNewListPage = (newListId) => {
   console.log("navigateToNewListPage ===>");
 
-  if (lists.find((list) => list.id == newListId)) {
-    // window.location.href = "/";
+  // if (lists.some((list) => list.id == newListId)) {
+  // window.location.href = "/";
 
-    const searchParams = new URLSearchParams({ id: newListId });
+  const searchParams = new URLSearchParams({ id: newListId });
 
-    const queryString = searchParams.toString();
+  const queryString = searchParams.toString();
 
-    localStorage.setItem("CURRENT_LIST_ID", JSON.stringify(newListId));
+  // localStorage.setItem("CURRENT_LIST_ID", JSON.stringify(newListId));
 
-    // window.location.href = newListUrl + queryString;
-  }
+  window.location.href = newListUrl + queryString;
 };
 
 // INVOKED FUNCTIONS

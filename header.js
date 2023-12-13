@@ -6,7 +6,7 @@ const containerEl = document.querySelector(".container");
 
 // document.addEventListener("DOMContentLoaded", () => {
 
-const currentListId = JSON.parse(localStorage.getItem("CURRENT_LIST_ID"));
+const currentListId = JSON.parse(sessionStorage.getItem("CURRENT_LIST_ID"));
 
 const getCurrentList = () => {
   console.log("getCurrentList >>>");
@@ -113,7 +113,7 @@ const handleHeaderClick = (e) => {
     const headerMainBtn = target.closest("[data-button='list']");
     const data = headerMainBtn.dataset.buttonUrl;
 
-    localStorage.removeItem("CURRENT_LIST_ID");
+    sessionStorage.removeItem("CURRENT_LIST_ID");
     sessionStorage.removeItem("isNewListPage");
     sessionStorage.removeItem("randomIconIndex");
 

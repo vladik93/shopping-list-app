@@ -8,7 +8,7 @@ export let items = JSON.parse(localStorage.getItem("ITEMS")) || [];
 
 export let collection = JSON.parse(localStorage.getItem("COLLECTION")) || [];
 
-console.log("items ===>", items);
+console.log("LISTS ===>", lists);
 
 export const suggestions = [
   "shopping",

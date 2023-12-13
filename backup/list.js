@@ -71,7 +71,3 @@ const navigateToNewTasksPage = (listId) => {
 };
 
 renderListPage(listId);
-
-// window.addEventListener("beforeunload", () => {
-//   localStorage.removeItem("CURRENT_LIST");
-// });

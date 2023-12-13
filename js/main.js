@@ -4,6 +4,7 @@ import { renderHeader } from "../header.js";
 const containerEl = document.querySelector(".container");
 
 const generateLists = () => {
+  console.log("generateLists >>>");
   containerEl.innerHTML = "";
 
   const mainEl = document.createElement("main");
@@ -30,6 +31,7 @@ const generateLists = () => {
     const mainListsEl = document.createElement("div");
     mainListsEl.classList.add("main-lists");
 
+    console.log("lists ===>", lists);
     mainListsEl.innerHTML += lists
       .map(
         (list) => `
@@ -74,17 +76,6 @@ const generateLists = () => {
   });
 };
 
-const addList = () => {
-  const list = {
-    id: new Date().getTime(),
-    title: "New Added List",
-  };
-
-  lists.push(list);
-
-  generateLists();
-};
-
 const handleMainClick = (e) => {
   console.log("handleMainClick ===>");
   let target = e.target;
@@ -102,7 +93,7 @@ const navigateToList = (listId) => {
   if (lists.some((list) => list.id === parseInt(listId))) {
     const found = lists.find((list) => list.id === parseInt(listId));
 
-    localStorage.setItem("CURRENT_LIST_ID", JSON.stringify(found.id));
+    // localStorage.setItem("CURRENT_LIST_ID", JSON.stringify(found.id));
 
     window.location.href = `http://localhost:5500/list.html?id=${found.id}`;
   }
