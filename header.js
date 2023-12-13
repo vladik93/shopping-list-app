@@ -9,18 +9,15 @@ const containerEl = document.querySelector(".container");
 const currentListId = JSON.parse(localStorage.getItem("CURRENT_LIST_ID"));
 
 const getCurrentList = () => {
+  console.log("getCurrentList >>>");
   if (currentListId !== null) {
     const found = lists.find((list) => list.id === currentListId);
-
-    console.log("found ==>", found);
 
     return found;
   }
 };
 
 let currentList = getCurrentList() || {};
-
-console.log("currentList ===>", currentList);
 
 const setHeaderSettings = (id = "", mainBtn = {}, title = "", actions = []) => {
   console.log("<<< setHeaderSettings >>>");
@@ -67,8 +64,6 @@ export const renderHeader = (headerSettingsObject) => {
     title,
     actionsArray,
   } = headerSettingsObject;
-
-  console.log("headerSettingsObject ===>", headerSettingsObject);
 
   const headerEl = document.createElement("header");
   headerEl.classList.add("header");

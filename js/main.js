@@ -4,11 +4,11 @@ import { renderHeader } from "../header.js";
 const containerEl = document.querySelector(".container");
 
 const generateLists = () => {
+  containerEl.innerHTML = "";
+
   const mainEl = document.createElement("main");
   mainEl.classList.add("main");
   mainEl.setAttribute("id", "main");
-
-  mainEl.innerHTML = "";
 
   if (!lists.length) {
     const mainNoListsEl = document.createElement("div");

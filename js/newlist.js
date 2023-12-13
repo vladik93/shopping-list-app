@@ -67,7 +67,7 @@ const renderSuggestionButton = (suggestion) => {
  */
 
 const renderSuggestions = () => {
-  console.log("renderSuggestions ===>");
+  console.log("renderSuggestions >>>");
   const suggestionsWrapperEl = document.createElement("div");
   suggestionsWrapperEl.classList.add("suggestions-wrapper");
 
@@ -90,7 +90,7 @@ const renderSuggestions = () => {
  * Renders the button for creating the new list.
  */
 const renderNewListButton = () => {
-  console.log("renderNewListButton ===>");
+  console.log("renderNewListButton >>>");
   const newListButtonWrapperEl = document.createElement("div");
   newListButtonWrapperEl.classList.add("new-list-button-wrapper");
   newListButtonWrapperEl.innerHTML = `<button class="new-list-button button--full button button--primary" data-button-action='create'>CREATE</button>`;
@@ -131,7 +131,7 @@ const handleNewListInputChange = (e) => {
  */
 
 const handleSuggestionsClick = (e) => {
-  console.log("handleSuggestionsClick ===>");
+  console.log("handleSuggestionsClick >>>");
   let target = e.target;
 
   if (target.closest(`[data-suggestion]`)) {
@@ -148,7 +148,6 @@ const handleNewListButtonClick = (e) => {
   console.log("handleNewListButtonClick >>>>");
 
   let listTitle = newListInputValue;
-  console.log("listTitle ===>", listTitle);
 
   let target = e.target;
   let action = target.dataset.buttonAction;
@@ -181,8 +180,6 @@ const navigateToNewListPage = (newListId) => {
   console.log("navigateToNewListPage ===>");
 
   if (lists.find((list) => list.id == newListId)) {
-    console.log("id found ===>", newListId);
-
     // window.location.href = "/";
 
     const searchParams = new URLSearchParams({ id: newListId });
@@ -191,7 +188,7 @@ const navigateToNewListPage = (newListId) => {
 
     localStorage.setItem("CURRENT_LIST_ID", JSON.stringify(newListId));
 
-    window.location.href = newListUrl + queryString;
+    // window.location.href = newListUrl + queryString;
   }
 };
 

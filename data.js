@@ -39,11 +39,10 @@ const addToCollection = (title) => {
     dateAdded: new Date(),
   };
 
+  if (collection.some((item) => item.title === title)) return;
   collection.push(item);
   localStorage.setItem("COLLECTION", JSON.stringify(collection));
 };
-
-addToCollection("chocolate");
 
 // const updateIsRecent = () => {
 //   console.log("updateIsRecent ====>", new Date());
