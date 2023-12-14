@@ -93,6 +93,7 @@ const navigateToList = (listId) => {
     console.log("found list ===>", found);
 
     window.location.href = `/list.html?id=${found.id}`;
+
     // USE RELATIVE PATH TO INSURE THE ORIGIN (LOCALHOST) STAYS THE SAME
   }
 };

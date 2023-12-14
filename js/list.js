@@ -35,11 +35,6 @@ const randomIconIndex = getRandomIconIndex();
 const renderListPage = (listPageId) => {
   console.log("renderListPage >>>");
 
-  // if (lists.some((list) => list.id === parseInt(listPageId))) {
-  // if (lists.some((list) => list.id === listPageId)) {
-  //   const found = lists.find((list) => list.id === parseInt(listPageId));
-  //   console.log("FOUND ===>", found);
-
   const listPageEl = document.createElement("div");
   listPageEl.classList.add("list-page-wrapper");
 
@@ -60,7 +55,6 @@ const renderListPage = (listPageId) => {
 
   listPageEl.addEventListener("click", handleListPageClick);
 };
-// };
 
 const handleListPageClick = (e) => {
   console.log("handleListPageClick >>>");
