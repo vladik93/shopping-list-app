@@ -186,9 +186,9 @@ const navigateToNewListPage = (newListId) => {
 
     const queryString = searchParams.toString();
 
-    localStorage.setItem("CURRENT_LIST_ID", JSON.stringify(newListId));
+    // localStorage.setItem("CURRENT_LIST_ID", JSON.stringify(newListId));
 
-    // window.location.href = newListUrl + queryString;
+    window.location.href = "list.html?" + queryString;
   }
 };
 

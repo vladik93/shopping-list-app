@@ -32,8 +32,7 @@ const generateLists = () => {
 
     mainListsEl.innerHTML += lists
       .map(
-        (list) => `
-      <div class="list-item" id=${list.id}>
+        (list) => `<div class="list-item" id=${list.id}>
         <button class="list-item-actions button--icon">
           <i class="fa-solid fa-ellipsis-vertical icon-md"></i>
         </button>
@@ -74,17 +73,6 @@ const generateLists = () => {
   });
 };
 
-const addList = () => {
-  const list = {
-    id: new Date().getTime(),
-    title: "New Added List",
-  };
-
-  lists.push(list);
-
-  generateLists();
-};
-
 const handleMainClick = (e) => {
   console.log("handleMainClick ===>");
   let target = e.target;
@@ -102,9 +90,10 @@ const navigateToList = (listId) => {
   if (lists.some((list) => list.id === parseInt(listId))) {
     const found = lists.find((list) => list.id === parseInt(listId));
 
-    localStorage.setItem("CURRENT_LIST_ID", JSON.stringify(found.id));
+    console.log("found list ===>", found);
 
-    window.location.href = `http://localhost:5500/list.html?id=${found.id}`;
+    window.location.href = `/list.html?id=${found.id}`;
+    // USE RELATIVE PATH TO INSURE THE ORIGIN (LOCALHOST) STAYS THE SAME
   }
 };
 

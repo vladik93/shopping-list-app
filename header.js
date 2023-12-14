@@ -1,5 +1,3 @@
-console.log("~ header.js ~");
-
 import { lists } from "./data.js";
 
 const containerEl = document.querySelector(".container");
@@ -9,7 +7,6 @@ const containerEl = document.querySelector(".container");
 const currentListId = JSON.parse(localStorage.getItem("CURRENT_LIST_ID"));
 
 const getCurrentList = () => {
-  console.log("getCurrentList >>>");
   if (currentListId !== null) {
     const found = lists.find((list) => list.id === currentListId);
 
@@ -20,8 +17,6 @@ const getCurrentList = () => {
 let currentList = getCurrentList() || {};
 
 const setHeaderSettings = (id = "", mainBtn = {}, title = "", actions = []) => {
-  console.log("<<< setHeaderSettings >>>");
-
   id = id;
 
   mainBtn.icon = mainBtn.icon;
@@ -57,8 +52,6 @@ const newListSettings = setHeaderSettings(
 );
 
 export const renderHeader = (headerSettingsObject) => {
-  console.log("renderHeader >>>");
-
   const {
     mainBtn: { url, icon, data },
     title,
@@ -105,8 +98,6 @@ const handleHeaderRenderByUrl = () => {
 };
 
 const handleHeaderClick = (e) => {
-  console.log("handleHeaderClick >>>");
-
   let target = e.target;
 
   if (target.closest("[data-button='list']")) {

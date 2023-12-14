@@ -12,6 +12,8 @@ const array = Array.from(entries);
 
 const listId = array[0];
 
+console.log("listId ===>", listId);
+
 const getRandomIconIndex = () => {
   console.log("getRandomIconIndex >>>");
   let index = undefined;
@@ -33,13 +35,15 @@ const randomIconIndex = getRandomIconIndex();
 const renderListPage = (listPageId) => {
   console.log("renderListPage >>>");
 
-  if (lists.some((list) => list.id === parseInt(listPageId))) {
-    const found = lists.find((list) => list.id === parseInt(listPageId));
+  // if (lists.some((list) => list.id === parseInt(listPageId))) {
+  // if (lists.some((list) => list.id === listPageId)) {
+  //   const found = lists.find((list) => list.id === parseInt(listPageId));
+  //   console.log("FOUND ===>", found);
 
-    const listPageEl = document.createElement("div");
-    listPageEl.classList.add("list-page-wrapper");
+  const listPageEl = document.createElement("div");
+  listPageEl.classList.add("list-page-wrapper");
 
-    listPageEl.innerHTML = `
+  listPageEl.innerHTML = `
     <i class="fa-solid fa-${icons[randomIconIndex]} icon--mdx3 list-icon"></i>
     <p class="primary-text main-title">Let's plan your shopping</p>
     <p class="secondary-text">Tap the plus button to create your first list</p>
@@ -52,11 +56,11 @@ const renderListPage = (listPageId) => {
     </div>
     `;
 
-    containerEl.appendChild(listPageEl);
+  containerEl.appendChild(listPageEl);
 
-    listPageEl.addEventListener("click", handleListPageClick);
-  }
+  listPageEl.addEventListener("click", handleListPageClick);
 };
+// };
 
 const handleListPageClick = (e) => {
   console.log("handleListPageClick >>>");
@@ -69,7 +73,3 @@ const handleListPageClick = (e) => {
 };
 
 renderListPage(listId);
-
-// window.addEventListener("beforeunload", () => {
-//   localStorage.removeItem("CURRENT_LIST");
-// });
