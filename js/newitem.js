@@ -197,7 +197,9 @@ const addListItem = (title) => {
     id: new Date().getTime(),
     dateCreated: new Date(),
     title,
-    quantity: 1,
+    quantity: undefined,
+    unit: undefined,
+    category: "other",
     listId: listId,
   };
 
@@ -205,7 +207,9 @@ const addListItem = (title) => {
 
   localStorage.setItem("ITEMS", JSON.stringify(items));
 
-  addToItemCollection(items[items.length - 1].title);
+  newItemInputEl.value = "";
+
+  navigateToPageWithId("list", listId);
 };
 
 const updateListItemElm = () => {
@@ -225,6 +229,6 @@ const updateListItemElm = () => {
   });
 };
 
-renderList();
+// renderList();
 
-updateListItemElm();
+// updateListItemElm();

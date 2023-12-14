@@ -1,6 +1,6 @@
 console.log("~ list.js ~");
 
-import { lists, icons } from "../data.js";
+import { lists, items, icons } from "../data.js";
 import { navigateToPageWithId } from "../functions.js";
 
 const containerEl = document.querySelector(".container");
@@ -11,6 +11,10 @@ const entries = new URLSearchParams(searchParams).values();
 const array = Array.from(entries);
 
 const listId = array[0];
+
+let listById;
+
+console.log(typeof listId);
 
 console.log("listId ===>", listId);
 
@@ -32,24 +36,63 @@ const getRandomIconIndex = () => {
 
 const randomIconIndex = getRandomIconIndex();
 
+const getItemsByListId = () => {
+  console.log("getItemsByListId ===>");
+  const filteredList = items.filter((item) => item.listId === listId);
+
+  listById = filteredList;
+};
+
+getItemsByListId();
+
+console.log(listById);
+
 const renderListPage = (listPageId) => {
   console.log("renderListPage >>>");
 
   const listPageEl = document.createElement("div");
   listPageEl.classList.add("list-page-wrapper");
 
-  listPageEl.innerHTML = `
+  if (!listById.length) {
+    listPageEl.classList.add("empty-list");
+
+    listPageEl.innerHTML = `
     <i class="fa-solid fa-${icons[randomIconIndex]} icon--mdx3 list-icon"></i>
-    <p class="primary-text main-title">Let's plan your shopping</p>
-    <p class="secondary-text">Tap the plus button to create your first list</p>
-      
-    <div class="list-button-wrapper">
-      <button class="add-item-button button button--lg button--primary" id="add-item" data-button-action="add-item">
-        <i class="fa-solid fa-plus"></i>
-        <span>ADD</span>
-      </button>
-    </div>
-    `;
+      <p class="primary-text main-title">Let's plan your shopping</p>
+      <p class="secondary-text">Tap the plus button to create your first list</p>
+  
+      <div class="list-button-wrapper">
+        <button class="add-item-button button button--lg button--primary" id="add-item" data-button-action="add-item">
+          <i class="fa-solid fa-plus"></i>
+          <span>ADD</span>
+        </button>
+      </div>`;
+  } else {
+    listPageEl.innerHTML += listById.map((list) => {
+      return `<p>${list.title}</p>`;
+    });
+  }
+  // listPageEl.innerHTML = !items.length
+  //   ? `
+  //   <i class="fa-solid fa-${icons[randomIconIndex]} icon--mdx3 list-icon"></i>
+  //   <p class="primary-text main-title">Let's plan your shopping</p>
+  //   <p class="secondary-text">Tap the plus button to create your first list</p>
+
+  //   <div class="list-button-wrapper">
+  //     <button class="add-item-button button button--lg button--primary" id="add-item" data-button-action="add-item">
+  //       <i class="fa-solid fa-plus"></i>
+  //       <span>ADD</span>
+  //     </button>
+  //   </div>
+  //   `
+  //   : `
+  //   <ul>
+  //     ${items
+  //       .filter((x) => x.listId)
+  //       .map((item) => `<li>${item.title}</li>`)
+  //       .join("")}
+  //   </ul>
+  //   `;
 
   containerEl.appendChild(listPageEl);
 
