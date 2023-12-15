@@ -139,3 +139,15 @@ body {
 .input--full {
   width: 100%;
 }
+
+.checkbox {
+  appearance: none;
+  height: 30px;
+  width: 30px;
+  border: 3px solid var(--color--primary);
+  border-radius: 100%;
+}
+
+.checkbox:checked {
+  background: green;
+}

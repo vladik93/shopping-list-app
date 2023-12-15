@@ -54,7 +54,7 @@ const renderListPage = (listPageId) => {
   listPageEl.classList.add("list-page-wrapper");
 
   if (!listById.length) {
-    listPageEl.classList.add("empty-list");
+    listPageEl.classList.add("list");
 
     listPageEl.innerHTML = `
     <i class="fa-solid fa-${icons[randomIconIndex]} icon--mdx3 list-icon"></i>
@@ -68,9 +68,9 @@ const renderListPage = (listPageId) => {
         </button>
       </div>`;
   } else {
-    listPageEl.innerHTML += listById.map((list) => {
-      return `<p>${list.title}</p>`;
-    });
+    listPageEl.classList.add("list", "empty");
+
+    listPageEl.innerHTML = items.map((item) => {});
   }
   // listPageEl.innerHTML = !items.length
   //   ? `
@@ -109,4 +109,4 @@ const handleListPageClick = (e) => {
   }
 };
 
-renderListPage(listId);
+// renderListPage(listId);

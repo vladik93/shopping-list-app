@@ -25,3 +25,9 @@
 .add-item-button span {
   padding: 0 0.8rem;
 }
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
