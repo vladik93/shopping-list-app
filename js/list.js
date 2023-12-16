@@ -14,9 +14,7 @@ const listId = array[0];
 
 let listById;
 
-console.log(typeof listId);
-
-console.log("listId ===>", listId);
+console.log("listById ===>", listById);
 
 const getRandomIconIndex = () => {
   console.log("getRandomIconIndex >>>");
@@ -50,13 +48,12 @@ console.log(listById);
 const renderListPage = (listPageId) => {
   console.log("renderListPage >>>");
 
-  const listPageEl = document.createElement("div");
-  listPageEl.classList.add("list-page-wrapper");
+  const listPageWrapperEl = document.createElement("div");
+  listPageWrapperEl.classList.add("list-page-wrapper");
 
   if (!listById.length) {
-    listPageEl.classList.add("list");
-
-    listPageEl.innerHTML = `
+    listPageWrapperEl.classList.add("empty");
+    listPageWrapperEl.innerHTML = `
     <i class="fa-solid fa-${icons[randomIconIndex]} icon--mdx3 list-icon"></i>
       <p class="primary-text main-title">Let's plan your shopping</p>
       <p class="secondary-text">Tap the plus button to create your first list</p>
@@ -68,9 +65,9 @@ const renderListPage = (listPageId) => {
         </button>
       </div>`;
   } else {
-    listPageEl.classList.add("list", "empty");
+    listPageWrapperEl.classList.add("list", "empty");
 
-    listPageEl.innerHTML = items.map((item) => {});
+    listPageWrapperEl.innerHTML = items.map((item) => {});
   }
   // listPageEl.innerHTML = !items.length
   //   ? `
@@ -94,9 +91,9 @@ const renderListPage = (listPageId) => {
   //   </ul>
   //   `;
 
-  containerEl.appendChild(listPageEl);
+  containerEl.appendChild(listPageWrapperEl);
 
-  listPageEl.addEventListener("click", handleListPageClick);
+  listPageWrapperEl.addEventListener("click", handleListPageClick);
 };
 
 const handleListPageClick = (e) => {
