@@ -172,3 +172,42 @@ let collection = [
 ];
 
 <==================================================================================
+
+
+
+.checkbox {
+  appearance: none;
+  height: 2.4rem;
+  width: 2.4rem;
+  border: 3px solid var(--color--primary);
+  border-radius: 100%;
+}
+
+.checkbox:checked {
+  border: none;
+}
+
+.checkbox-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkbox-wrapper i {
+  position: absolute;
+  display: flex;
+  color: var(--color--primary);
+  opacity: 0;
+  visibility: hidden;
+  font-size: 2.4rem;
+}
+
+.checkbox:checked + i {
+  opacity: 1;
+  visibility: visible;
+}
+
+.checkbox:checked {
+  background: red;
+}

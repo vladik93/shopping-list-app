@@ -59,7 +59,7 @@ export const renderHeader = (headerSettingsObject) => {
   } = headerSettingsObject;
 
   const headerEl = document.createElement("header");
-  headerEl.classList.add("header");
+  headerEl.classList.add("header", `header-${data}`);
 
   headerEl.innerHTML = `
     <button class="button--icon header-main-button" data-main-button data-button=${data} data-button-url=${url}>
@@ -78,7 +78,8 @@ export const renderHeader = (headerSettingsObject) => {
     </div>
     `;
 
-  containerEl.appendChild(headerEl);
+  // containerEl.appendChild(headerEl);
+  containerEl.insertAdjacentElement("afterbegin", headerEl);
 
   headerEl.addEventListener("click", handleHeaderClick);
 };

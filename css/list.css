@@ -2,10 +2,9 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
   position: relative;
-  padding: 4rem 0.8rem;
+  /* padding: 4rem 0rem; */
 }
 
 .list-icon {
@@ -26,8 +25,80 @@
   padding: 0 0.8rem;
 }
 
+.items-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
 .item {
   display: flex;
   align-items: center;
   gap: 1.6rem;
+  justify-content: space-between;
+  padding: 2rem 0.8rem;
+  background-color: #fff;
+}
+
+.item.complete {
+  background: none;
+}
+
+.item:nth-last-child(1 of :not(.complete)) {
+  box-shadow: 0 3px 6px #dadada;
+}
+
+.item.complete {
+  color: var(--color-disabled);
+}
+
+.item-column {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.checkbox {
+  appearance: none;
+  height: 2rem;
+  width: 2rem;
+  border: 2px solid var(--color--primary);
+  border-radius: 100%;
+}
+
+.icon-wrapper {
+  background-color: var(--color-bg);
+  padding: 0.8rem;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-wrapper {
+  background: #fff;
+  padding: 0 0.8rem;
+  padding-bottom: 0.8rem;
+}
+
+.progress {
+  display: flex;
+  background: var(--color-bg);
+  padding: 0.8rem 0;
+  width: 100%;
+  border-radius: 1.6rem;
+  position: relative;
+  overflow: hidden;
+  /* margin: 0rem 1.6rem; */
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: var(--color-accent);
+  border-radius: 1.6rem;
 }
