@@ -55,10 +55,6 @@
   background: none;
 }
 
-.item.checked .item-checkbox {
-  display: none;
-}
-
 .item:nth-last-child(1 of :not(.complete)) {
   box-shadow: 0 3px 6px #dadada;
 }
@@ -117,8 +113,29 @@
   border-radius: 1.6rem;
 }
 
-.item {
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
 }
 
 .item.checked {
+  background: none;
+  color: var(--color-disabled);
+}
+
+.item.checked .item-checkbox {
+  display: none;
+}
+
+.item .item-checkbox ~ i {
+  display: none;
+}
+
+.item.checked .item-checkbox ~ i {
+  display: flex;
+}
+
+.item-check-icon {
+  font-size: 2.4rem;
+  color: var(--color-accent);
 }
