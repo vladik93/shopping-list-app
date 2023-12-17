@@ -137,14 +137,8 @@ const onItemsClick = (e) => {
     let selected = target.closest(".item-checkbox");
     console.log("selected ===>", selected);
 
-    // if (selected.checked) {
-    //   console.log("checked");
-    //   selected.closest(".item").classList.add("checked");
-    // } else {
-    //   console.log("unchecked");
-    //   selected.closest(".item").classList.remove("checked");
-    // }
     selected.closest(".item").classList.toggle("checked");
+    !!selected.checked;
   }
 };
 
