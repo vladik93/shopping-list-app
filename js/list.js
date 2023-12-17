@@ -12,7 +12,7 @@ const array = Array.from(entries);
 
 const listId = array[0];
 
-let listById;
+let listById = [];
 
 console.log("listById ===>", listById);
 
@@ -36,64 +36,84 @@ const randomIconIndex = getRandomIconIndex();
 
 const getItemsByListId = () => {
   console.log("getItemsByListId ===>");
-  const filteredList = items.filter((item) => item.listId === listId);
+  const filteredList = items.filter((item) => item.listId === parseInt(listId));
 
   listById = filteredList;
 };
 
-getItemsByListId();
-
-console.log(listById);
-
 const renderListPage = (listPageId) => {
   console.log("renderListPage >>>");
+
+  containerEl.innerHTML = "";
 
   const listPageWrapperEl = document.createElement("div");
   listPageWrapperEl.classList.add("list-page-wrapper");
 
+  const progressWrapperEl = document.createElement("div");
+  progressWrapperEl.classList.add("progress-wrapper");
+  progressWrapperEl.innerHTML = `
+      <div class="progress">
+        <span class="progress-bar"></span>
+      </div>`;
+
+  listPageWrapperEl.insertAdjacentElement("afterbegin", progressWrapperEl);
+
   if (!listById.length) {
-    listPageWrapperEl.classList.add("empty");
-    listPageWrapperEl.innerHTML = `
-    <i class="fa-solid fa-${icons[randomIconIndex]} icon--mdx3 list-icon"></i>
+    listPageWrapperEl.classList.add("empty-list");
+
+    const mainWrapperEl = document.createElement("div");
+    mainWrapperEl.classList.add("main-wrapper");
+    mainWrapperEl.innerHTML = `
+      <i class="fa-solid fa-${icons[randomIconIndex]} icon--mdx3 list-icon"></i>
       <p class="primary-text main-title">Let's plan your shopping</p>
       <p class="secondary-text">Tap the plus button to create your first list</p>
-  
-      <div class="list-button-wrapper">
-        <button class="add-item-button button button--lg button--primary" id="add-item" data-button-action="add-item">
-          <i class="fa-solid fa-plus"></i>
-          <span>ADD</span>
-        </button>
-      </div>`;
+    `;
+    listPageWrapperEl.appendChild(mainWrapperEl);
   } else {
-    listPageWrapperEl.classList.add("list", "empty");
+    const itemsWrapperEl = document.createElement("div");
+    itemsWrapperEl.classList.add("items-wrapper");
+    listById.map((listItem) => {
+      itemsWrapperEl.innerHTML += renderListItem(listItem);
+    });
 
-    listPageWrapperEl.innerHTML = items.map((item) => {});
+    listPageWrapperEl.appendChild(itemsWrapperEl);
   }
-  // listPageEl.innerHTML = !items.length
-  //   ? `
-  //   <i class="fa-solid fa-${icons[randomIconIndex]} icon--mdx3 list-icon"></i>
-  //   <p class="primary-text main-title">Let's plan your shopping</p>
-  //   <p class="secondary-text">Tap the plus button to create your first list</p>
 
-  //   <div class="list-button-wrapper">
-  //     <button class="add-item-button button button--lg button--primary" id="add-item" data-button-action="add-item">
-  //       <i class="fa-solid fa-plus"></i>
-  //       <span>ADD</span>
-  //     </button>
-  //   </div>
-  //   `
-  //   : `
-  //   <ul>
-  //     ${items
-  //       .filter((x) => x.listId)
-  //       .map((item) => `<li>${item.title}</li>`)
-  //       .join("")}
-  //   </ul>
-  //   `;
+  const listButtonWrapperEl = document.createElement("div");
+  listButtonWrapperEl.classList.add("list-button-wrapper");
+
+  listButtonWrapperEl.innerHTML = `
+    <button class="add-item-button button button--lg button--primary" id="add-item" data-button-action="add-item">
+      <i class="fa-solid fa-plus"></i>
+      <span>ADD</span>
+    </button>`;
+
+  listPageWrapperEl.insertAdjacentElement("beforeend", listButtonWrapperEl);
 
   containerEl.appendChild(listPageWrapperEl);
 
   listPageWrapperEl.addEventListener("click", handleListPageClick);
+};
+
+const renderListItem = (item) => {
+  const { id, title } = item;
+
+  const listItemTemplate = `
+  <div class="item">
+    <div class="item-column item-column-left">
+      <label class="checkbox-wrapper">
+        <input type="checkbox" class="checkbox" />
+      </label>
+      <h4>${title}</h4>
+    </div>
+    <div class="item-column item-column-right">
+      <div class="icon-wrapper">
+        <i class="fa-solid fa-cheese icon"></i>
+      </div>
+    </div>
+  </div>`;
+
+  return listItemTemplate;
 };
 
 const handleListPageClick = (e) => {
@@ -106,4 +126,6 @@ const handleListPageClick = (e) => {
   }
 };
 
-// renderListPage(listId);
+getItemsByListId();
+
+renderListPage(listId);

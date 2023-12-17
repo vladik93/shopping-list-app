@@ -200,7 +200,7 @@ const addListItem = (title) => {
     quantity: undefined,
     unit: undefined,
     category: "other",
-    listId: listId,
+    listId: parseInt(listId),
   };
 
   items.push(listItem);

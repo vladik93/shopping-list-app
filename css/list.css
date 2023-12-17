@@ -1,16 +1,21 @@
 .list-page-wrapper {
-  height: 100%;
   display: flex;
   flex-direction: column;
-
-  position: relative;
-  /* padding: 4rem 0rem; */
+  flex: 1;
 }
 
+.empty-list .main-wrapper {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* 
 .list-page-wrapper.empty {
   align-items: center;
   justify-content: center;
-}
+} */
 
 .list-icon {
   padding-bottom: 3.2rem;
@@ -90,7 +95,7 @@
 .progress {
   display: flex;
   background: var(--color-bg);
-  padding: 0.8rem 0;
+  padding: 0.4rem 0;
   width: 100%;
   border-radius: 1.6rem;
   position: relative;

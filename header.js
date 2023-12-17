@@ -16,13 +16,7 @@ const getCurrentList = () => {
 
 let currentList = getCurrentList() || {};
 
-const setHeaderSettings = (
-  id = "",
-  mainBtn = {},
-  title = "",
-  actions = [],
-  ...options
-) => {
+const setHeaderSettings = (id = "", mainBtn = {}, title = "", actions = []) => {
   id = id;
 
   mainBtn.icon = mainBtn.icon;
@@ -33,7 +27,7 @@ const setHeaderSettings = (
   const actionsArray = [];
   actions.forEach((action) => actionsArray.push(action));
 
-  return { mainBtn, title, actionsArray, options };
+  return { mainBtn, title, actionsArray };
 };
 
 const listPageSettings = setHeaderSettings(
@@ -63,10 +57,7 @@ export const renderHeader = (headerSettingsObject) => {
     mainBtn: { url, icon, data },
     title,
     actionsArray,
-    options,
   } = headerSettingsObject;
-
-  console.log(options);
 
   const headerEl = document.createElement("header");
   headerEl.classList.add("header", `header-${data}`);
