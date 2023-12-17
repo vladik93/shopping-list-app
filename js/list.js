@@ -77,6 +77,8 @@ const renderListPage = (listPageId) => {
     });
 
     listPageWrapperEl.appendChild(itemsWrapperEl);
+
+    itemsWrapperEl.addEventListener("click", onItemsClick);
   }
 
   const listButtonWrapperEl = document.createElement("div");
@@ -97,12 +99,13 @@ const renderListPage = (listPageId) => {
 
 const renderListItem = (item) => {
   const { id, title } = item;
-
+  // FIX THIS SO THAT PARENT ELEMENT AFFECTS CHECKBOX STYLING
   const listItemTemplate = `
   <div class="item">
     <div class="item-column item-column-left">
-      <label class="checkbox-wrapper">
-        <input type="checkbox" class="checkbox" />
+      <label for="item-checkbox" class="checkbox-wrapper">
+        <input type="checkbox" id="item-checkbox-${id}" class="checkbox item-checkbox" />
+        <i class="fa-solid fa-check item-check-icon item-checkbox"></i>
       </label>
       <h4>${title}</h4>
     </div>
@@ -123,6 +126,25 @@ const handleListPageClick = (e) => {
 
   if (target.closest("[data-button-action='add-item']")) {
     navigateToPageWithId("newitem", listId);
+  }
+};
+
+const onItemsClick = (e) => {
+  console.log("onItemsClick ===>");
+  let target = e.target;
+
+  if (target.closest(".item-checkbox")) {
+    let selected = target.closest(".item-checkbox");
+    console.log("selected ===>", selected);
+
+    // if (selected.checked) {
+    //   console.log("checked");
+    //   selected.closest(".item").classList.add("checked");
+    // } else {
+    //   console.log("unchecked");
+    //   selected.closest(".item").classList.remove("checked");
+    // }
+    selected.closest(".item").classList.toggle("checked");
   }
 };
 
