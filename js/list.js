@@ -101,7 +101,7 @@ const renderListItem = (item) => {
   const { id, title } = item;
   // FIX THIS SO THAT PARENT ELEMENT AFFECTS CHECKBOX STYLING
   const listItemTemplate = `
-  <div class="item">
+  <div class="item" id=${id}>
       <label for="item-checkbox" class="checkbox-wrapper">
         <input type="checkbox" id="item-checkbox-${id}" class="checkbox item-checkbox" />
         <i class="fa-solid fa-check item-check-icon"></i>
@@ -130,12 +130,30 @@ const onItemsClick = (e) => {
   console.log("onItemsClick ===>");
   let target = e.target;
 
+  console.log(target);
+
   if (target.closest(".item-checkbox")) {
     let selected = target.closest(".item-checkbox");
     console.log("selected ===>", selected);
 
-    selected.closest(".item").classList.toggle("checked");
+    let item = selected.closest(".item");
+    item.classList.toggle("checked");
     !!selected.checked;
+
+    setItemIsDone(item.id);
+  }
+};
+
+const setItemIsDone = (itemId) => {
+  console.log("setItemIsDone ===>");
+  console.log("itemId ===>", itemId);
+  let found = items.find((item) => item.id == parseInt(itemId));
+
+  if (found) {
+    found.isDone = !found.isDone;
+    console.log("found modified ===>", found);
+  } else {
+    console.log("item not found ===>");
   }
 };
 
