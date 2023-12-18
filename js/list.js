@@ -101,19 +101,16 @@ const renderListItem = (item) => {
   const { id, title } = item;
   // FIX THIS SO THAT PARENT ELEMENT AFFECTS CHECKBOX STYLING
   const listItemTemplate = `
-  <div class="item checked">
-    <div class="item-column item-column-left">
+  <div class="item">
       <label for="item-checkbox" class="checkbox-wrapper">
         <input type="checkbox" id="item-checkbox-${id}" class="checkbox item-checkbox" />
-        <i class="fa-solid fa-check item-check-icon item-checkbox"></i>
+        <i class="fa-solid fa-check item-check-icon"></i>
       </label>
-      <h4>${title}</h4>
-    </div>
-    <div class="item-column item-column-right">
+      <h4 class="item-content">${title}</h4>
       <div class="icon-wrapper">
         <i class="fa-solid fa-cheese icon"></i>
       </div>
-    </div>
+    
   </div>`;
 
   return listItemTemplate;
