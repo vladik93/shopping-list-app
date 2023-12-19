@@ -98,12 +98,18 @@ const renderListPage = (listPageId) => {
 };
 
 const renderListItem = (item) => {
-  const { id, title } = item;
-  // FIX THIS SO THAT PARENT ELEMENT AFFECTS CHECKBOX STYLING
+  console.log("renderListItem >>>");
+
+  const { id, title, isDone } = item;
+  console.log("item ===>", item);
+
+  console.log("isDone ===>", isDone);
   const listItemTemplate = `
-  <div class="item" id=${id}>
+  <div class="item ${isDone ? "checked" : ""}" id=${id}>
       <label for="item-checkbox" class="checkbox-wrapper">
-        <input type="checkbox" id="item-checkbox-${id}" class="checkbox item-checkbox" />
+        <input type="checkbox" id="item-checkbox-${id}" class="checkbox item-checkbox" checked=${
+    isDone ? true : false
+  } />
         <i class="fa-solid fa-check item-check-icon"></i>
       </label>
       <h4 class="item-content">${title}</h4>
@@ -130,11 +136,8 @@ const onItemsClick = (e) => {
   console.log("onItemsClick ===>");
   let target = e.target;
 
-  console.log(target);
-
   if (target.closest(".item-checkbox")) {
     let selected = target.closest(".item-checkbox");
-    console.log("selected ===>", selected);
 
     let item = selected.closest(".item");
     item.classList.toggle("checked");
@@ -145,16 +148,34 @@ const onItemsClick = (e) => {
 };
 
 const setItemIsDone = (itemId) => {
-  console.log("setItemIsDone ===>");
-  console.log("itemId ===>", itemId);
-  let found = items.find((item) => item.id == parseInt(itemId));
+  console.log("setItemIsDone >>>");
+  let newArray = items.map((item) => {
+    if (item.id === parseInt(itemId)) {
+      return { ...item, isDone: !item.isDone };
+    } else {
+      return item;
+    }
+  });
 
-  if (found) {
-    found.isDone = !found.isDone;
-    console.log("found modified ===>", found);
-  } else {
-    console.log("item not found ===>");
-  }
+  localStorage.setItem("ITEMS", JSON.stringify(newArray));
+  getItemsByListId();
+  console.log("listById ===>", listById);
+};
+
+const renderList = () => {
+  console.log("renderList >>>");
+  let itemsWrapperEl = document.querySelector(".items-wrapper");
+
+  itemsWrapperEl.innerHTML = "";
+
+  console.log("listById ===>", listById);
+  listById.map((listItem) => {
+    itemsWrapperEl.innerHTML += renderListItem(listItem);
+  });
+
+  // listById.map((listItem) => {
+  //   itemsWrapperEl.innerHTML += renderListItem(listItem);
+  // });
 };
 
 getItemsByListId();
