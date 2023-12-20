@@ -4,6 +4,7 @@ import { lists, items, icons } from "../data.js";
 import { navigateToPageWithId } from "../functions.js";
 
 const containerEl = document.querySelector(".container");
+const itemsWrapperEl = document.querySelector(".items-wrapper");
 
 const url = window.location.href;
 const searchParams = new URL(url).searchParams;
@@ -164,20 +165,30 @@ const setItemIsDone = (itemId) => {
 
 const renderList = () => {
   console.log("renderList >>>");
-  let itemsWrapperEl = document.querySelector(".items-wrapper");
 
   itemsWrapperEl.innerHTML = "";
 
   console.log("listById ===>", listById);
-  listById.map((listItem) => {
-    itemsWrapperEl.innerHTML += renderListItem(listItem);
-  });
 
-  // listById.map((listItem) => {
-  //   itemsWrapperEl.innerHTML += renderListItem(listItem);
-  // });
+  listById.map(({ id, title }) => {
+    const itemEl = document.createElement("div");
+    itemEl.classList.add("item");
+    itemEl.innerHTML = `
+      <label for="item-checkbox" class="checkbox-wrapper">
+        <input type="checkbox" id="item-checkbox-${id}" class="checkbox item-checkbox" />
+        <i class="fa-solid fa-check item-check-icon"></i>
+      </label>
+      <h4 class="item-content">${title}</h4>
+      <div class="icon-wrapper">
+        <i class="fa-solid fa-cheese icon"></i>
+      </div>`;
+
+    itemsWrapperEl.appendChild(itemEl);
+  });
 };
 
-getItemsByListId();
+renderList();
+
+// getItemsByListId();
 
 renderListPage(listId);
