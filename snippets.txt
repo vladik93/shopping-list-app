@@ -211,3 +211,23 @@ let collection = [
 .checkbox:checked {
   background: red;
 }
+
+
+=============================================================================================================================
+
+LIST.js
+
+
+const setItemsCheckbox = () => {
+  let newItemsArr = items.map((item) => {
+    return { ...item, isDone: true };
+  });
+
+  localStorage.setItem("ITEMS", JSON.stringify(newItemsArr));
+
+  getItems();
+
+  containerEl.innerHTML = JSON.stringify(itemsByListId);
+};
+
+setItemsCheckbox();

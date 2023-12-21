@@ -189,7 +189,7 @@ const addToItemCollection = (title) => {
   renderList();
 };
 
-const addListItem = (title) => {
+export const addListItem = (title) => {
   console.log("addListItem ===>");
   if (items.some((item) => item.title === title)) return;
 
