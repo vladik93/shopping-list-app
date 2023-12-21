@@ -38,6 +38,11 @@ const onItemClick = (e) => {
   if (target.closest(".item-checkbox")) {
     const checkboxEl = target.closest(".item-checkbox");
     console.log("checkbox ===>", checkboxEl);
+    let itemEl = target.closest(".item");
+    let itemId = parseInt(itemEl.id);
+
+    console.log(itemId);
+    toggleCheckboxById(itemId);
   }
 };
 
@@ -64,6 +69,24 @@ const renderList = () => {
 
       itemsWrapperEl.appendChild(itemEl);
     });
+  }
+};
+
+const toggleCheckboxById = (itemId) => {
+  console.log("toggleCheckboxById ===>");
+  console.log("itemId ===>", itemId);
+  console.log("items ====> before =>", items);
+
+  if (items) {
+    let newArray = items.map((item) => {
+      if (item.id == itemId) {
+        return { ...item, isDone: !item.isDone };
+      } else {
+        return item;
+      }
+    });
+    localStorage.setItem("ITEMS", JSON.stringify(newArray));
+    getItems();
   }
 };
 
