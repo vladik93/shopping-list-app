@@ -1,9 +1,5 @@
 console.log("data.js ===>");
 
-if (localStorage.getItem("LISTS") !== null) {
-  console.log("list storage found!!!");
-}
-
 export const host = 5500;
 
 export let lists = JSON.parse(localStorage.getItem("LISTS")) || [];
@@ -11,6 +7,8 @@ export let lists = JSON.parse(localStorage.getItem("LISTS")) || [];
 export let items = JSON.parse(localStorage.getItem("ITEMS")) || [];
 
 export let collection = JSON.parse(localStorage.getItem("COLLECTION")) || [];
+
+console.log("items ===>", items);
 
 export const suggestions = [
   "shopping",

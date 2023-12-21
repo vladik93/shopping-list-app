@@ -14,8 +14,6 @@ const listId = array[0];
 
 let listById = [];
 
-console.log("listById ===>", listById);
-
 const getRandomIconIndex = () => {
   console.log("getRandomIconIndex >>>");
   let index = undefined;
