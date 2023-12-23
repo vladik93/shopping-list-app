@@ -32,7 +32,7 @@ const addNewListItem = (title, listId) => {
     unit: undefined,
     category: "other",
     isDone: false,
-    listId: parseInt(listId),
+    listId: listId,
   };
 
   items.push(listItem);

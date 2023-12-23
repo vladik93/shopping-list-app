@@ -16,7 +16,6 @@ const listId = parseInt(array[0]);
 let listItems = JSON.parse(localStorage.getItem("LIST_ITEMS")) || [];
 
 const getListItems = () => {
-  console.log("getListItem >>>");
   let newArray = items.filter((item) => item.listId === listId);
   localStorage.setItem("LIST_ITEMS", JSON.stringify(newArray));
 };
@@ -42,14 +41,20 @@ const updateItemIsDone = (itemId) => {
   console.log("updateItemIsDone >>>");
   if (items) {
     let newItemArray = items.map((item) => {
-      console.log("itemId ===>", itemId);
-      console.log("item ===>", item.id);
       if (item.id === itemId) {
+        console.log("isDone ===>", item.isDone);
+        console.log(
+          "isDone ===>",
+          item.isDone,
+          "isDone opposite ===>",
+          !item.isDone
+        );
         return { ...item, isDone: !item.isDone };
       } else {
         return item;
       }
     });
+    localStorage.setItem("ITEMS", JSON.stringify(newItemArray));
   }
 };
 
@@ -58,10 +63,6 @@ const onListItemClick = (e) => {
   if (target.closest(".item-checkbox")) {
     let itemId = parseInt(e.target.closest(".item").id);
     let checkboxEl = e.target.closest(".item-checkbox");
-
-    // console.log("itemId ===>", itemId);
-
-    // PROBLEM IS HERE WITH PASSING THE WRONG PARAM TO updateItemIsDone FUNC!
 
     updateItemIsDone(itemId);
   }
@@ -99,5 +100,5 @@ const renderListItems = () => {
   }
 };
 
-// getListItems();
+getListItems();
 renderListItems();
