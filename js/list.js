@@ -4,6 +4,7 @@ import { lists, items, icons } from "../data.js";
 import { navigateToPageWithId } from "../functions.js";
 
 const containerEl = document.querySelector(".container");
+const itemsWrapperEl = document.querySelector(".items-wrapper");
 
 const url = window.location.href;
 const searchParams = new URL(url).searchParams;
@@ -15,7 +16,6 @@ const listId = parseInt(array[0]);
 let listItems = JSON.parse(localStorage.getItem("LIST_ITEMS")) || [];
 
 const getListItems = () => {
-  console.log("getListItems ===>");
   let newArray = items.filter((item) => item.listId === listId);
   localStorage.setItem("LIST_ITEMS", JSON.stringify(newArray));
 };
@@ -23,25 +23,27 @@ const getListItems = () => {
 getListItems();
 
 const updateStorageItems = (itemId) => {
-  console.log("updateItems >>>");
-  if (items.some((item) => item.id == itemId)) {
+  console.log("updateStorageItems >>>");
+  if (items.some((item) => item.id === itemId)) {
     let newItems = items.map((item) => {
-      if (item.id == itemId) {
+      if (item.id === itemId) {
         return { ...item, isDone: !item.isDone };
       } else {
         return item;
       }
     });
+
     localStorage.setItem("ITEMS", JSON.stringify(newItems));
   }
 };
 
-const updateItemIsDone = (itemId) => {
-  console.log("updateItemIsDone ===>");
+console.log("listItems ===>", listItems);
 
+const updateItemIsDone = (itemId) => {
+  console.log("updateItemIsDone >>>");
   if (listItems) {
     let newItemList = listItems.map((listItem) => {
-      if (listItem.id == itemId) {
+      if (listItem.id === itemId) {
         return { ...listItem, isDone: !listItem.isDone };
       } else {
         return listItem;
@@ -54,5 +56,42 @@ const updateItemIsDone = (itemId) => {
   }
 };
 
-updateItemIsDone(1703286472897);
-updateItemIsDone(1703286472897);
+const onListItemClick = (e) => {
+  let target = e.target;
+  if (target.closest(".item-checkbox")) {
+    let itemId = parseInt(e.target.closest(".item").id);
+    let checkboxEl = e.target.closest(".item-checkbox");
+
+    updateItemIsDone(itemId);
+  }
+};
+
+const renderListItems = () => {
+  itemsWrapperEl.innerHTML = "";
+  if (listItems.length) {
+    listItems.map((item) => {
+      const { id, title, isDone } = item;
+      let itemEl = document.createElement("div");
+      itemEl.classList.add("item");
+      itemEl.setAttribute("id", id);
+
+      itemEl.innerHTML = `
+        <label for="item-checkbox" class="checkbox-wrapper">
+          <input type="checkbox" class="checkbox item-checkbox" />
+          <i class="fa-solid fa-check item-check-icon"></i>
+        </label>
+        <h4 class="item-content">${title}</h4>
+        <div class="icon-wrapper">
+          <i class="fa-solid fa-cheese icon"></i>
+        </div>`;
+
+      itemsWrapperEl.appendChild(itemEl);
+
+      itemEl.addEventListener("click", onListItemClick);
+    });
+  } else {
+    itemsWrapperEl.classList.add("items-wrapper-empty");
+  }
+};
+
+renderListItems();
