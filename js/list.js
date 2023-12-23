@@ -21,29 +21,30 @@ const getListItems = () => {
   localStorage.setItem("LIST_ITEMS", JSON.stringify(newArray));
 };
 
-const updateStorageItems = (itemId) => {
-  console.log("updateStorageItems >>>");
-  if (items.some((item) => item.id === itemId)) {
-    let newItems = items.map((item) => {
-      if (item.id === itemId) {
-        return { ...item, isDone: !item.isDone };
-      } else {
-        return item;
-      }
-    });
+// const updateStorageItems = (itemId) => {
+//   console.log("updateStorageItems >>>");
+//   if (items.some((item) => item.id === itemId)) {
+//     let newItems = items.map((item) => {
+//       if (item.id === itemId) {
+//         return { ...item, isDone: !item.isDone };
+//       } else {
+//         return item;
+//       }
+//     });
 
-    localStorage.setItem("ITEMS", JSON.stringify(newItems));
-  }
-};
+//     localStorage.setItem("ITEMS", JSON.stringify(newItems));
+//   }
+// };
 
 console.log("listItems ===>", listItems);
 
 const updateItemIsDone = (itemId) => {
   console.log("updateItemIsDone >>>");
-  console.log("itemId ===>", itemId);
   if (items) {
     let newItemArray = items.map((item) => {
-      if (item.id == itemId) {
+      console.log("itemId ===>", itemId);
+      console.log("item ===>", item.id);
+      if (item.id === itemId) {
         return { ...item, isDone: !item.isDone };
       } else {
         return item;
