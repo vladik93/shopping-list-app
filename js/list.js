@@ -40,17 +40,15 @@ console.log("listItems ===>", listItems);
 
 const updateItemIsDone = (itemId) => {
   console.log("updateItemIsDone >>>");
+  console.log("itemId ===>", itemId);
   if (items) {
     let newItemArray = items.map((item) => {
-      console.log("item ===>", item);
-      if (item.id === itemId) {
+      if (item.id == itemId) {
         return { ...item, isDone: !item.isDone };
       } else {
         return item;
       }
     });
-
-    console.log("newItemArray ===>", newItemArray);
   }
 };
 
@@ -60,7 +58,7 @@ const onListItemClick = (e) => {
     let itemId = parseInt(e.target.closest(".item").id);
     let checkboxEl = e.target.closest(".item-checkbox");
 
-    console.log("itemId ===>", itemId);
+    // console.log("itemId ===>", itemId);
 
     // PROBLEM IS HERE WITH PASSING THE WRONG PARAM TO updateItemIsDone FUNC!
 
