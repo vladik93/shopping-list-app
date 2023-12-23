@@ -16,11 +16,10 @@ const listId = parseInt(array[0]);
 let listItems = JSON.parse(localStorage.getItem("LIST_ITEMS")) || [];
 
 const getListItems = () => {
+  console.log("getListItem >>>");
   let newArray = items.filter((item) => item.listId === listId);
   localStorage.setItem("LIST_ITEMS", JSON.stringify(newArray));
 };
-
-getListItems();
 
 const updateStorageItems = (itemId) => {
   console.log("updateStorageItems >>>");
@@ -41,18 +40,17 @@ console.log("listItems ===>", listItems);
 
 const updateItemIsDone = (itemId) => {
   console.log("updateItemIsDone >>>");
-  if (listItems) {
-    let newItemList = listItems.map((listItem) => {
-      if (listItem.id === itemId) {
-        return { ...listItem, isDone: !listItem.isDone };
+  if (items) {
+    let newItemArray = items.map((item) => {
+      console.log("item ===>", item);
+      if (item.id === itemId) {
+        return { ...item, isDone: !item.isDone };
       } else {
-        return listItem;
+        return item;
       }
     });
 
-    localStorage.setItem("LIST_ITEMS", JSON.stringify(newItemList));
-
-    updateStorageItems(itemId);
+    console.log("newItemArray ===>", newItemArray);
   }
 };
 
@@ -62,22 +60,30 @@ const onListItemClick = (e) => {
     let itemId = parseInt(e.target.closest(".item").id);
     let checkboxEl = e.target.closest(".item-checkbox");
 
+    console.log("itemId ===>", itemId);
+
+    // PROBLEM IS HERE WITH PASSING THE WRONG PARAM TO updateItemIsDone FUNC!
+
     updateItemIsDone(itemId);
   }
 };
 
 const renderListItems = () => {
+  console.log("renderListItems >>>");
   itemsWrapperEl.innerHTML = "";
   if (listItems.length) {
     listItems.map((item) => {
       const { id, title, isDone } = item;
+      console.log("isDone ===>", isDone);
       let itemEl = document.createElement("div");
       itemEl.classList.add("item");
       itemEl.setAttribute("id", id);
 
       itemEl.innerHTML = `
         <label for="item-checkbox" class="checkbox-wrapper">
-          <input type="checkbox" class="checkbox item-checkbox" />
+          <input type="checkbox" class="checkbox item-checkbox" checked=${
+            isDone ? "true" : "false"
+          } />
           <i class="fa-solid fa-check item-check-icon"></i>
         </label>
         <h4 class="item-content">${title}</h4>
@@ -94,4 +100,5 @@ const renderListItems = () => {
   }
 };
 
+// getListItems();
 renderListItems();
