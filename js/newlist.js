@@ -150,9 +150,11 @@ const handleNewListButtonClick = (e) => {
   let listTitle = newListInputValue;
 
   let target = e.target;
-  let action = target.dataset.buttonAction;
+  let action = target.closest(".new-list-button");
 
-  if (action === "create") {
+  console.log("action ->", action);
+
+  if (action) {
     // addNewList(listTitle);
     addNewList(listTitle);
   }
@@ -165,6 +167,7 @@ const addNewList = (title) => {
     id: new Date().getTime(),
     dateAdded: new Date(),
     title: title !== "" ? title : "New List",
+    listItems: [],
   };
 
   lists.push(newList);
@@ -175,6 +178,8 @@ const addNewList = (title) => {
 
   navigateToNewListPage(newList.id);
 };
+
+addNewList("TITLE");
 
 const navigateToNewListPage = (newListId) => {
   console.log("navigateToNewListPage ===>");

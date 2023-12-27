@@ -54,6 +54,7 @@ const updateItemIsDone = (itemId) => {
         return item;
       }
     });
+    listItems = newItemArray;
     localStorage.setItem("ITEMS", JSON.stringify(newItemArray));
   }
 };
