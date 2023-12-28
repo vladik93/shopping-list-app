@@ -160,6 +160,22 @@ const handleNewListButtonClick = (e) => {
   }
 };
 
+const navigateToNewListPage = (newListId) => {
+  console.log("navigateToNewListPage ===>");
+
+  if (lists.find((list) => list.id == newListId)) {
+    // window.location.href = "/";
+
+    const searchParams = new URLSearchParams({ id: newListId });
+
+    const queryString = searchParams.toString();
+
+    // localStorage.setItem("CURRENT_LIST_ID", JSON.stringify(newListId));
+
+    window.location.href = "list.html?" + queryString;
+  }
+};
+
 const addNewList = (title) => {
   console.log("addNewList >>>");
 
@@ -177,24 +193,6 @@ const addNewList = (title) => {
   // document.querySelector('[data-input="new-list"]').value = "";
 
   navigateToNewListPage(newList.id);
-};
-
-addNewList("TITLE");
-
-const navigateToNewListPage = (newListId) => {
-  console.log("navigateToNewListPage ===>");
-
-  if (lists.find((list) => list.id == newListId)) {
-    // window.location.href = "/";
-
-    const searchParams = new URLSearchParams({ id: newListId });
-
-    const queryString = searchParams.toString();
-
-    // localStorage.setItem("CURRENT_LIST_ID", JSON.stringify(newListId));
-
-    window.location.href = "list.html?" + queryString;
-  }
 };
 
 // INVOKED FUNCTIONS

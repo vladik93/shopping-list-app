@@ -21,21 +21,27 @@ export const navigateToPageWithId = (pageName, id) => {
   window.location.href = `${pageName}.html?` + queryString;
 };
 
-const addNewListItem = (title, listId) => {
-  if (items.some((item) => item.title === title)) return;
+export const addListItem = (title, listid) => {
+  if (currentList) {
+    let listItem = {
+      id: new Date().getTime(),
+      dateCreated: new Date(),
+      title,
+      quantity: undefined,
+      unit: undefined,
+      category: "other",
+      isDone: false,
+      listId: parseInt(listId),
+    };
 
-  let listItem = {
-    id: new Date().getTime(),
-    dateCreated: new Date(),
-    title,
-    quantity: undefined,
-    unit: undefined,
-    category: "other",
-    isDone: false,
-    listId: listId,
-  };
-
-  items.push(listItem);
-
-  localStorage.setItem("ITEMS", JSON.stringify(items));
+    let newList = lists.map((list) => {
+      if (list.id === listid) {
+        return { ...list, listItems: [...list.listItems, listItem] };
+      } else {
+        return list;
+      }
+    });
+    localStorage.setItem("LISTS", JSON.stringify(newList));
+    getListById(listid);
+  }
 };
