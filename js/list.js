@@ -67,9 +67,13 @@ const renderListItems = () => {
 
 const updateItemIsDone = (itemId) => {
   console.log("updateItemIsDone function ->");
-  let list = currentList;
 
-  console.log("list ->", list);
+  let newListsArray = lists.map((list) => {
+    if (list.id === currentList.id) {
+    }
+  });
+
+  console.log("newListsArray ->", newListsArray);
 };
 
 updateItemIsDone();
