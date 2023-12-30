@@ -4,6 +4,7 @@ import { lists, items, icons } from "../data.js";
 import { navigateToPageWithId } from "../functions.js";
 
 const containerEl = document.querySelector(".container");
+const listPageWrapper = document.querySelector(".list-page-wrapper");
 const itemsWrapperEl = document.querySelector(".items-wrapper");
 
 const url = window.location.href;
@@ -14,6 +15,7 @@ const array = Array.from(entries);
 const listId = parseInt(array[0]);
 
 let currentList = JSON.parse(localStorage.getItem("CURRENT_LIST")) || {};
+let currentIconIndex = JSON.parse(sessionStorage.getItem("randomIconIndex"));
 
 // let listItems = currentList.listItems;
 
@@ -31,7 +33,7 @@ getListById(listId);
 const renderListItems = () => {
   console.log("renderListItems function ->");
   itemsWrapperEl.innerHTML = "";
-  if (currentList.listItems.length) {
+  if (currentList && currentList.listItems.length) {
     currentList.listItems.map((item) => {
       const { id, title, isDone } = item;
       let itemEl = document.createElement("div");
@@ -40,8 +42,8 @@ const renderListItems = () => {
 
       itemEl.innerHTML = `
         <label for="item-checkbox" class="checkbox-wrapper">
-          <input type="checkbox" class="checkbox item-checkbox" checked=${
-            isDone ? true : false
+          <input type="checkbox" class="checkbox item-checkbox" ${
+            isDone ? "checked" : ""
           } />
           <i class="fa-solid fa-check item-check-icon"></i>
         </label>
@@ -64,6 +66,18 @@ const renderListItems = () => {
     });
   } else {
     itemsWrapperEl.classList.add("items-wrapper-empty");
+    itemsWrapperEl.innerHTML += `
+      <div class="list-icon-wrapper">
+        <i class="fa-solid fa-fish icon--lg"></i>
+      </div>
+      <div class="list-text-wrapper">
+        <p class="primary-text">What do you need to buy?</p>
+        <p class="text--sm secondary-text">Tap the plus button to start adding products.</p>
+      </div>
+
+    
+    
+    `;
   }
 };
 

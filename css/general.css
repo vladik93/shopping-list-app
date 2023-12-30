@@ -149,3 +149,23 @@ body {
 .input--full {
   width: 100%;
 }
+
+.checkbox {
+  background: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox:checked::after {
+  content: "";
+  position: absolute;
+  background: var(--color-accent);
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  height: 75%;
+  width: 75%;
+  border-radius: 100%;
+}
