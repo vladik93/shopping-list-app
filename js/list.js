@@ -15,12 +15,12 @@ const listId = parseInt(array[0]);
 
 let currentList = JSON.parse(localStorage.getItem("CURRENT_LIST")) || {};
 
-let listItems = currentList.listItems;
-console.log("listItems ->", listItems);
+// let listItems = currentList.listItems;
 
 const getListById = (listId) => {
-  if (lists && lists.length) {
-    let list = lists.find((list) => list.id === listId);
+  const LISTS = JSON.parse(localStorage.getItem("LISTS") || []);
+  if (LISTS && LISTS.length) {
+    let list = LISTS.find((list) => list.id === listId);
     currentList = list;
     localStorage.setItem("CURRENT_LIST", JSON.stringify(currentList));
   }
@@ -29,9 +29,10 @@ const getListById = (listId) => {
 getListById(listId);
 
 const renderListItems = () => {
+  console.log("renderListItems function ->");
   itemsWrapperEl.innerHTML = "";
-  if (listItems.length) {
-    listItems.map((item) => {
+  if (currentList.listItems.length) {
+    currentList.listItems.map((item) => {
       const { id, title, isDone } = item;
       let itemEl = document.createElement("div");
       itemEl.classList.add("item");
@@ -39,7 +40,9 @@ const renderListItems = () => {
 
       itemEl.innerHTML = `
         <label for="item-checkbox" class="checkbox-wrapper">
-          <input type="checkbox" class="checkbox item-checkbox"  />
+          <input type="checkbox" class="checkbox item-checkbox" checked=${
+            isDone ? true : false
+          } />
           <i class="fa-solid fa-check item-check-icon"></i>
         </label>
         <h4 class="item-content">${title}</h4>
@@ -47,17 +50,16 @@ const renderListItems = () => {
           <i class="fa-solid fa-cheese icon"></i>
         </div>`;
 
-      itemEl.addEventListener("click", (e) => {
+      itemEl.addEventListener("change", (e) => {
         let target = e.target;
         let itemEl = target.closest(".item");
         let checkboxEl = target.closest(".item-checkbox");
-        let userId = parseInt(itemEl.id);
+        let itemId = parseInt(itemEl.id);
 
         if (checkboxEl) {
+          updateItemIsDone(listId, itemId);
         }
       });
-      itemEl.querySelector(".item-checkbox").checked = isDone ? true : false;
-
       itemsWrapperEl.appendChild(itemEl);
     });
   } else {
@@ -65,17 +67,28 @@ const renderListItems = () => {
   }
 };
 
-const updateItemIsDone = (itemId) => {
-  console.log("updateItemIsDone function ->");
-
-  let newListsArray = lists.map((list) => {
-    if (list.id === currentList.id) {
+const updateItemIsDone = (listId, itemId) => {
+  const LISTS = JSON.parse(localStorage.getItem("LISTS"));
+  let newListArray = LISTS.map((list) => {
+    if (list.id === listId) {
+      return {
+        ...list,
+        listItems: list.listItems.map((item) => {
+          if (item.id === itemId) {
+            return { ...item, isDone: !item.isDone };
+          } else {
+            return item;
+          }
+        }),
+      };
+    } else {
+      return list;
     }
   });
 
-  console.log("newListsArray ->", newListsArray);
+  localStorage.setItem("LISTS", JSON.stringify(newListArray));
+  getListById(listId);
+  renderListItems();
 };
-
-updateItemIsDone();
 
 renderListItems();
