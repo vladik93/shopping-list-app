@@ -105,4 +105,12 @@ const updateItemIsDone = (listId, itemId) => {
   renderListItems();
 };
 
+listPageWrapper.addEventListener("click", (e) => {
+  let target = e.target;
+  let addItemBtn = target.closest("#add-item-button");
+  if (addItemBtn) {
+    document.location.href = d;
+  }
+});
+
 renderListItems();
