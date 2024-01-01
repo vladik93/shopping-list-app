@@ -109,7 +109,13 @@ listPageWrapper.addEventListener("click", (e) => {
   let target = e.target;
   let addItemBtn = target.closest("#add-item-button");
   if (addItemBtn) {
-    document.location.href = d;
+    const searchParams = new URLSearchParams({ id: listId });
+
+    const queryString = searchParams.toString();
+
+    // localStorage.setItem("CURRENT_LIST_ID", JSON.stringify(newListId));
+
+    window.location.href = "newitem.html?" + queryString;
   }
 });
 

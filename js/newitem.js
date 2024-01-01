@@ -189,29 +189,31 @@ const addToItemCollection = (title) => {
   renderList();
 };
 
-const addListItem = (title) => {
-  console.log("addListItem ===>");
-  if (items.some((item) => item.title === title)) return;
+const addListItem = (title) => {};
 
-  let listItem = {
-    id: new Date().getTime(),
-    dateCreated: new Date(),
-    title,
-    quantity: undefined,
-    unit: undefined,
-    category: "other",
-    isDone: false,
-    listId: parseInt(listId),
-  };
+// const addListItem = (title) => {
+//   console.log("addListItem ===>");
+//   if (items.some((item) => item.title === title)) return;
 
-  items.push(listItem);
+//   let listItem = {
+//     id: new Date().getTime(),
+//     dateCreated: new Date(),
+//     title,
+//     quantity: undefined,
+//     unit: undefined,
+//     category: "other",
+//     isDone: false,
+//     listId: parseInt(listId),
+//   };
 
-  localStorage.setItem("ITEMS", JSON.stringify(items));
+//   items.push(listItem);
 
-  newItemInputEl.value = "";
+//   localStorage.setItem("ITEMS", JSON.stringify(items));
 
-  navigateToPageWithId("list", listId);
-};
+//   newItemInputEl.value = "";
+
+//   navigateToPageWithId("list", listId);
+// };
 
 const updateListItemElm = () => {
   console.log("updateListItemElm ===>");
